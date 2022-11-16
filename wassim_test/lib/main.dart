@@ -26,6 +26,7 @@ class _HomePageState extends State <HomePage> {
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: LoginScreen(),
       backgroundColor:Color(0xff373447),
     );
@@ -43,12 +44,19 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State <LoginScreen> {
   @override 
   Widget build(BuildContext context){
-
-    return Padding(
-      
+    return Container(
       padding: const EdgeInsets.all(60),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+
+          colors: <Color>[
+          Color(0xff373447), Color(0xff1F1E2B)
+        ]
+        )
+      ),
       child: Column(
-        
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -82,6 +90,9 @@ class _LoginScreenState extends State <LoginScreen> {
                 enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0),
                  borderSide: BorderSide(color: Color(0xff2496AC), width: 4.0)
                  ),
+                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0),
+                 borderSide: BorderSide(color: Color(0xff2496AC), width: 4.0)
+                 ),
                 contentPadding: const EdgeInsets.all(15),
                 filled: true,
                 hintText: "Email",
@@ -102,6 +113,9 @@ class _LoginScreenState extends State <LoginScreen> {
                 enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0),
                  borderSide: BorderSide(color: Color(0xff2496AC), width: 4.0)
                  ),
+                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0),
+                 borderSide: BorderSide(color: Color(0xff2496AC), width: 4.0, )
+                 ),
                 contentPadding: const EdgeInsets.all(15),
                 filled: true,
                 hintText: "Password",
@@ -118,7 +132,7 @@ class _LoginScreenState extends State <LoginScreen> {
           ),
           SizedBox(
             width: 280.0,
-            height: 60, 
+            height: 65, 
             child: RawMaterialButton(
               fillColor: Colors.white,
               elevation: 0.0,
