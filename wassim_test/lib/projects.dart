@@ -36,7 +36,7 @@ class _projectsState extends State<projects> {
             textAlign: TextAlign.center, 
             ),
             Text(
-            'projects t nzid nchoufha 5ater kif tamel route aadi bel materialapp ygeneri f erreur ',
+            'projects',
             style: TextStyle(color: Color(0xffD3D3D3), fontSize: 28.0, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center, 
             ),
