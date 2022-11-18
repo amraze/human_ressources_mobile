@@ -10,7 +10,53 @@ class projects extends StatefulWidget {
 class _projectsState extends State<projects> {
   @override
   Widget build(BuildContext context) {
-   return Container(
+
+   return Scaffold(
+    drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text("Mohamed Naski",
+              style: TextStyle(color: Colors.black),),
+              accountEmail: Text("mohamed.naski@supcom.tn",
+              style: TextStyle(color: Colors.black),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage
+                    ('https://scontent.ftun10-1.fna.fbcdn.net/v/t39.30808-6/256387445_1468760843517912_6354916045760652092_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=174925&_nc_ohc=BomqUcauA8EAX-L76wR&_nc_oc=AQkFpAwmCDnbvvY3lUQrtsLEiKnogdsyZ9rwQNXj4pvtKPZUe7HYS_PYJnW9aVnHk5E&_nc_ht=scontent.ftun10-1.fna&oh=00_AfCWvCKdU-Lo0wZeNrXttDkWbBOwdFOB8BITtXIY-eXNVQ&oe=637B4882'),
+                   
+              ),
+              
+                 
+            ),
+            
+            ListTile(
+              leading: Icon(Icons.account_box),
+              title: Text("My Profile"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.insights),
+              title: Text("Performance"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text("Logout"),
+              onTap: () {},
+            )
+          ],
+        ),
+      ),
+      appBar: 
+   PreferredSize(
+          preferredSize: Size.fromHeight(50.0), // here the desired height
+          child: AppBar(
+         title:Text('Projects'),
+        centerTitle: true,
+    )),
+    body: 
+    Container(
       padding: const EdgeInsets.all(60),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -30,21 +76,14 @@ class _projectsState extends State<projects> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-            Text(
-            'Welcome to ',
-            style: TextStyle(color: Color(0xffD3D3D3), fontSize: 28.0, fontWeight: FontWeight.w300),
-            textAlign: TextAlign.center, 
-            ),
-            Text(
-            'projects',
-            style: TextStyle(color: Color(0xffD3D3D3), fontSize: 28.0, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center, 
-            ),
+            
           ]   
           ),
         ],
       ),
-    );
+    ));
 
   }
 }
+
+
