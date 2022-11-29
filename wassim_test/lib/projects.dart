@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 
 class projects extends StatefulWidget {
@@ -58,7 +60,8 @@ class _projectsState extends State<projects> {
     )),
     body: 
     Container(
-      padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
+      margin: new EdgeInsets.all(0),
+      padding: const EdgeInsets.fromLTRB(40, 40 , 35, 10),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -72,61 +75,36 @@ class _projectsState extends State<projects> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-            buildImageInteractionCard(),
-          ]   
-          ),
+            buildImageInteractionCard("Project 1", 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80'),
+            SizedBox(height: 20,),
+            buildImageInteractionCard("Project 2", 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80'),
+            SizedBox(height: 20,),
+            buildImageInteractionCard("Project 3", 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80'),
         ],
       ),
     ));
   }
 }
 
-Widget buildQuoteCard() => Card(
-    clipBehavior: Clip.antiAlias,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20)
-    ),
-    child: Stack(
-      alignment: Alignment.center,
-      children: [  
-        Ink.image(
-          image: NetworkImage(
-            'https://scontent.ftun10-1.fna.fbcdn.net/v/t39.30808-6/256387445_1468760843517912_6354916045760652092_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=174925&_nc_ohc=BomqUcauA8EAX-L76wR&_nc_oc=AQkFpAwmCDnbvvY3lUQrtsLEiKnogdsyZ9rwQNXj4pvtKPZUe7HYS_PYJnW9aVnHk5E&_nc_ht=scontent.ftun10-1.fna&oh=00_AfCWvCKdU-Lo0wZeNrXttDkWbBOwdFOB8BITtXIY-eXNVQ&oe=637B4882'
-          ),
-          height: 240,
-          fit: BoxFit.cover,
-
-        )
-         
-      ],
-    ),
-);
-
-
- Widget buildImageInteractionCard() => Card(
+ Widget buildImageInteractionCard(String projectName, String imageURL) => Card(
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
         child: new InkWell(
           onTap: () {
-        print("tapped");
+            
         },
         child: Column(
-          
           children: [
             Stack(
-              
               children: [
                 Ink.image(
                   image: NetworkImage(
-                    'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80',
+                    imageURL,
                   ),
-                  height: 190,
-                  width: 360,
+                  height: 140,
+                  width: 350,
                   fit: BoxFit.fitWidth,
                 ),
                 Positioned(
@@ -148,12 +126,13 @@ Widget buildQuoteCard() => Card(
             Padding(
               padding: EdgeInsets.all(20),
               child: Text(
-                'Project 1',
+                projectName,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff2496AC) ),
               ),
             ),
           ],
         ),
         )
+        
         
       );
