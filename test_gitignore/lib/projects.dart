@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class projects extends StatefulWidget {
   const projects({super.key});
 
@@ -9,131 +9,157 @@ class projects extends StatefulWidget {
 }
 
 class _projectsState extends State<projects> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
+  static final List<Widget> _widgetOptions = <Widget>[
+    ListView(
+      padding: const EdgeInsets.all(8),
+      children: <Widget>[
+        Container(
+          height: 50,
+          color: Colors.amber[600],
+          child: const Center(child: Text('Entry A')),
+        ),
+        Container(
+          height: 50,
+          color: Colors.amber[500],
+          child: const Center(child: Text('Entry B')),
+        ),
+        Container(
+          height: 50,
+          color: Colors.amber[100],
+          child: const Center(child: Text('Entry C')),
+        ),
+      ],
+    ),
+    const Text(
+      'Index 1: Tasks',
+      style: optionStyle,
+    ),
+    const Text(
+      'Index 2: Calander',
+      style: optionStyle,
+    ),
+  ];
+
+  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
+  void _onItemTapped(int index) {
+    index == 3
+        ? _drawerKey.currentState?.openDrawer()
+        : setState(() {
+            _selectedIndex = index;
+          });
+  }
+
   @override
   Widget build(BuildContext context) {
-
-   return Scaffold(
-    drawer: Drawer(
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(55, 52, 71, 1),
+      key: _drawerKey,
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      drawer: Drawer(
+        backgroundColor: const Color.fromRGBO(34, 36, 49, 1),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30),
+                bottomRight: Radius.circular(30))),
         child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
-              accountName: Text("Mohamed Naski",
-              style: TextStyle(color: Colors.black),),
-              accountEmail: Text("mohamed.naski@supcom.tn",
-              style: TextStyle(color: Colors.black),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(16.0),
+              child: const CircleAvatar(
+                radius: 80,
+                backgroundImage:
+                    AssetImage('assets/images/employee-retention-rate.jpg'),
               ),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage
-                    ('https://scontent.ftun10-1.fna.fbcdn.net/v/t39.30808-6/256387445_1468760843517912_6354916045760652092_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=174925&_nc_ohc=BomqUcauA8EAX-L76wR&_nc_oc=AQkFpAwmCDnbvvY3lUQrtsLEiKnogdsyZ9rwQNXj4pvtKPZUe7HYS_PYJnW9aVnHk5E&_nc_ht=scontent.ftun10-1.fna&oh=00_AfCWvCKdU-Lo0wZeNrXttDkWbBOwdFOB8BITtXIY-eXNVQ&oe=637B4882'),
-                   
-              ),
-              
-                 
             ),
-            
-            ListTile(
-              leading: Icon(Icons.account_box),
-              title: Text("My Profile"),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.insights),
-              title: Text("Performance"),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text("Logout"),
-              onTap: () {},
-            )
-          ],
-        ),
-      ),
-      appBar: 
-          PreferredSize(
-            preferredSize: Size.fromHeight(50.0), // here the desired height
-            child: AppBar(
-              backgroundColor: Color(0xff2496AC),
-          title:Text('Projects'),
-        centerTitle: true,
-    )),
-    body: 
-    Container(
-      margin: new EdgeInsets.all(0),
-      padding: const EdgeInsets.fromLTRB(40, 40 , 35, 10),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: <Color>[
-          Color(0xff373447), Color(0xff1F1E2B)
-        ]
-        )
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-            buildImageInteractionCard("Project 1", 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80'),
-            SizedBox(height: 20,),
-            buildImageInteractionCard("Project 2", 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80'),
-            SizedBox(height: 20,),
-            buildImageInteractionCard("Project 3", 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80'),
-        ],
-      ),
-    ));
-  }
-}
-
- Widget buildImageInteractionCard(String projectName, String imageURL) => Card(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: new InkWell(
-          onTap: () {
-            
-        },
-        
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Ink.image(
-                  image: NetworkImage(
-                    imageURL,
-                  ),
-                  height: 140,
-                  width: 350,
-                  fit: BoxFit.fitWidth,
-                ),
-                Positioned(
-                  bottom: 16,
-                  right: 16,
-                  left: 16,
-                  child: Text(
-                    'Click to show more details',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                  
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
+            const DrawerHeader(
               child: Text(
-                projectName,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff2496AC) ),
+                'Drawer Header',
+                style: optionStyle,
               ),
+            ),
+            /*AppDropdownInput(
+              hintText: "Porfile",
+              options: const ["Stat", "Setting"],
+              //value: profile
+              //onChanged" (String value) {setState((){ profile = value;});}
+              //getLabel: (String value) => value,
+            ), */
+            ListTile(
+              title: const Text(
+                'Profile',
+                style: optionStyle,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'Projects',
+                style: optionStyle,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'Setting',
+                style: optionStyle,
+              ),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
-        )
- 
-        
-      );
+      ),
+      bottomNavigationBar: Theme(
+          data: ThemeData(
+            canvasColor: const Color.fromRGBO(55, 52, 71, 1),
+            textTheme: Theme.of(context)
+                .textTheme
+                .copyWith(caption: const TextStyle(color: Colors.yellow)),
+          ),
+          child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle_rounded),
+                label: 'Profile',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.track_changes_outlined),
+                label: 'Tasks',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.today),
+                label: 'Projects',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.menu),
+                label: 'Drawer',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            elevation: 0.0,
+            selectedItemColor: const Color.fromRGBO(39, 195, 237, 1),
+            unselectedItemColor: Colors.white,
+            onTap: _onItemTapped,
+          )),
+    );
+  }
+
+  static appconaitner(Text text) {}
+}
