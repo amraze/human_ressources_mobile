@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'LoginScreen.dart';
 
 // ignore: camel_case_types
 class projects extends StatefulWidget {
@@ -8,11 +9,13 @@ class projects extends StatefulWidget {
   State<projects> createState() => _projectsState();
 }
 
+// ignore: camel_case_types
 class _projectsState extends State<projects> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
   static final List<Widget> _widgetOptions = <Widget>[
+    //FIRST PAGE : HOME ++++++++++++++++++++++++++++++++++++++++++++
     ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
@@ -33,10 +36,12 @@ class _projectsState extends State<projects> {
         ),
       ],
     ),
+    // SECOND PAGE: TASKS ++++++++++++++++++++++++++++++++++++++++
     const Text(
       'Index 1: Tasks',
       style: optionStyle,
     ),
+    // THIRD PAGE: CALANDER +++++++++++++++++++++++++++++++++++++
     const Text(
       'Index 2: Calander',
       style: optionStyle,
@@ -55,6 +60,11 @@ class _projectsState extends State<projects> {
 
   @override
   Widget build(BuildContext context) {
+    const circleAvatar = CircleAvatar(
+      radius: 80,
+      backgroundImage: AssetImage(
+          'https://scontent.ftun10-1.fna.fbcdn.net/v/t39.30808-6/256387445_1468760843517912_6354916045760652092_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=174925&_nc_ohc=BomqUcauA8EAX-L76wR&_nc_oc=AQkFpAwmCDnbvvY3lUQrtsLEiKnogdsyZ9rwQNXj4pvtKPZUe7HYS_PYJnW9aVnHk5E&_nc_ht=scontent.ftun10-1.fna&oh=00_AfCWvCKdU-Lo0wZeNrXttDkWbBOwdFOB8BITtXIY-eXNVQ&oe=637B4882'),
+    );
     return Scaffold(
       backgroundColor: const Color.fromRGBO(55, 52, 71, 1),
       key: _drawerKey,
@@ -82,8 +92,9 @@ class _projectsState extends State<projects> {
             ),
             const DrawerHeader(
               child: Text(
-                'Drawer Header',
+                'Mohamed Naski',
                 style: optionStyle,
+                textAlign: TextAlign.center,
               ),
             ),
             /*AppDropdownInput(
@@ -94,35 +105,43 @@ class _projectsState extends State<projects> {
               //getLabel: (String value) => value,
             ), */
             ListTile(
+              leading: const Icon(
+                Icons.account_box,
+                color: Colors.white,
+              ),
               title: const Text(
-                'Profile',
+                "My Profile",
                 style: optionStyle,
               ),
-              onTap: () {
-                Navigator.pop(context);
-              },
+              onTap: () {},
             ),
             ListTile(
+              leading: const Icon(
+                Icons.insights,
+                color: Colors.white,
+              ),
               title: const Text(
-                'Projects',
+                "Performance",
                 style: optionStyle,
               ),
-              onTap: () {
-                Navigator.pop(context);
-              },
+              onTap: () {},
             ),
             ListTile(
+              leading: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
               title: const Text(
-                'Setting',
+                "Logout",
                 style: optionStyle,
               ),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
               },
-            ),
+            )
           ],
         ),
       ),
