@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'LoginScreen.dart';
 import 'package:wassim_test/HomePage/HomePage.dart';
 import 'package:wassim_test/NavigationBar.dart';
+import 'package:wassim_test/Performance/TapBar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,10 +38,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     //FIRST PAGE : HOME ++++++++++++++++++++++++++++++++++++++++++++
     const ProfilePage(),
     // SECOND PAGE: TASKS ++++++++++++++++++++++++++++++++++++++++
-    const Text(
-      'Index 1: Tasks',
-      style: optionStyle,
-    ),
+    TabBarAndTabViews(),
     // THIRD PAGE: CALANDER +++++++++++++++++++++++++++++++++++++
     const Text(
       'Index 2: Calander',
