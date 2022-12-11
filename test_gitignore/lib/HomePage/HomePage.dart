@@ -7,6 +7,7 @@ import 'package:wassim_test/HomePage/widget/button_widget.dart';
 import 'package:wassim_test/HomePage/widget/numbers_widget.dart';
 import 'package:wassim_test/HomePage/widget/profile_widget.dart';
 import 'package:wassim_test/NavigationBar.dart';
+import 'package:wassim_test/Performance/Performace.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -77,7 +78,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildUpgradeButton() => ButtonWidget(
         text: 'Check Performance',
-        onClicked: () {},
+        onClicked: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const PerPage()));
+        },
       );
 
   Widget buildAbout(User user) => Container(

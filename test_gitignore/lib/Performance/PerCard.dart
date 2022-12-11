@@ -12,7 +12,7 @@ class InfoCard extends StatelessWidget {
         left: 10,
         right: 10,
       ),
-      margin: const EdgeInsets.only(top: 20, bottom: 120.0),
+      margin: const EdgeInsets.only(top: 20, bottom: 300.0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0),
           boxShadow: [
@@ -25,14 +25,16 @@ class InfoCard extends StatelessWidget {
           ],
           gradient: const RadialGradient(
             colors: [
-              Color.fromARGB(255, 48, 179, 255),
-              Color.fromARGB(255, 71, 164, 218)
+              Color.fromARGB(255, 71, 164, 218),
+              Color.fromARGB(255, 77, 176, 233),
+              Color.fromARGB(255, 22, 105, 153),
+              Color.fromARGB(255, 2, 55, 85),
             ],
-            focal: Alignment.topCenter,
+            focal: Alignment.topLeft,
             radius: .85,
           )),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 20.0),
+        padding: const EdgeInsets.only(top: 0.0),
         child: Column(
           children: const [
             Center(

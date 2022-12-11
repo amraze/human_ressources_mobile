@@ -4,6 +4,7 @@ import 'LoginScreen.dart';
 import 'package:wassim_test/HomePage/HomePage.dart';
 import 'package:wassim_test/NavigationBar.dart';
 import 'package:wassim_test/Performance/TapBar.dart';
+import 'package:wassim_test/Performance/Performace.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,7 +39,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     //FIRST PAGE : HOME ++++++++++++++++++++++++++++++++++++++++++++
     const ProfilePage(),
     // SECOND PAGE: TASKS ++++++++++++++++++++++++++++++++++++++++
-    TabBarAndTabViews(),
+    const TabBarAndTabViews(),
     // THIRD PAGE: CALANDER +++++++++++++++++++++++++++++++++++++
     const Text(
       'Index 2: Calander',
@@ -139,7 +140,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 "Performance",
                 style: optionStyle,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PerPage()),
+                );
+              },
             ),
             ListTile(
               leading: const Icon(

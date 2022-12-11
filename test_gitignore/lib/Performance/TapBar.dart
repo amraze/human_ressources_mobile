@@ -1,6 +1,8 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:wassim_test/Performance/PerCard.dart';
+import 'package:wassim_test/Performance/PerCardMicro.dart';
+import 'package:wassim_test/Performance/PerCardMicro.dart';
 
 const TextStyle optionStyle =
     TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
@@ -21,7 +23,7 @@ List<TabPair> TabPairs = [
         style: optionStyle,
       ),
     ),
-    view: InfoCard(),
+    view: const InfoCard(),
   ),
   TabPair(
     tab: const Tab(
@@ -82,18 +84,24 @@ class _TabBarAndTabViewsState extends State<TabBarAndTabViews>
                 25.0,
               ),
             ),
-            margin: const EdgeInsets.only(top: 30.0),
+            margin: const EdgeInsets.only(top: 0.0),
             child: Padding(
               padding: const EdgeInsets.all(6),
               child: TabBar(
                   controller: _tabController,
                   // give the indicator a decoration (color and border radius)
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      25.0,
-                    ),
-                    color: const Color.fromARGB(255, 48, 179, 255),
-                  ),
+                      borderRadius: BorderRadius.circular(
+                        25.0,
+                      ),
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 71, 164, 218),
+                          Color.fromARGB(255, 2, 55, 85),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      )),
                   labelColor: const Color.fromARGB(255, 0, 0, 0),
                   unselectedLabelColor:
                       const Color.fromARGB(255, 255, 255, 255),
