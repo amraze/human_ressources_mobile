@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'project_members.dart';
 
 Widget buildProjectsPage() {
-  return Container(
-    margin: const EdgeInsets.all(0),
-    padding: const EdgeInsets.fromLTRB(40, 40, 35, 10),
-    decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        buildProjectCard("Project 1",
-            'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200'),
-        const SizedBox(
-          height: 20,
-        ),
-        buildProjectCard("Project 2",
-            'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200'),
-        const SizedBox(
-          height: 20,
-        ),
-      ],
+  return SingleChildScrollView(
+    child: Container(
+      margin: const EdgeInsets.all(0),
+      padding: const EdgeInsets.fromLTRB(40, 40, 35, 10),
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          buildProjectCard("Project 1",
+              'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200'),
+          const SizedBox(
+            height: 20,
+          ),
+          buildProjectCard("Project 2",
+              'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200'),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -37,13 +40,7 @@ Widget buildProjectCard(String projectName, String imageURL) => Card(
     ),
     child: InkWell(
       onTap: () {
-        // Navigator.pushNamed(
-        //   context,
-        //   '/projectMembers',
-        //   arguments: ProjectMembersArguments(
-        //     projectName,
-        //   ),
-        // );
+        body:buildProjectMembersPage();
       },
       child: Column(
         children: [
