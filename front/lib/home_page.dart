@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetOptions = <Widget>[
     // Profile
     buildProfilePage(),
-    // Tasks
+    // Current Project tasks
     buildProjectMembersPage(),
     // Projects
     buildProjectsPage(),
@@ -100,13 +100,6 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.center,
               ),
             ),
-            /*AppDropdownInput(
-              hintText: "Porfile",
-              options: const ["Stat", "Setting"],
-              //value: profile
-              //onChanged" (String value) {setState((){ profile = value;});}
-              //getLabel: (String value) => value,
-            ), */
             ListTile(
               leading: const Icon(
                 Icons.account_box,
@@ -149,17 +142,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      // appBar: PreferredSize(
-      //     preferredSize: const Size.fromHeight(40.0), // here the desired height
-      //     child: AppBar(
-      //       backgroundColor: const Color(0xff353445),
-      //       title: Text('Projects',
-      //           style: GoogleFonts.poppins(
-      //               fontSize: 20,
-      //               fontWeight: FontWeight.w500,
-      //               color: const Color.fromARGB(255, 255, 255, 255))),
-      //       centerTitle: true,
-      //     )),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
