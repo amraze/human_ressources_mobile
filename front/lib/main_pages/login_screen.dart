@@ -22,7 +22,11 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/images/logo.jpg'),
+            Image.asset(
+              'assets/images/logo.png',
+              height: 120,
+              width: 120,
+            ),
             const SizedBox(
               height: 30.0,
             ),
@@ -79,7 +83,13 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(
               width: 280,
-              child: TextField(
+              child: TextFormField(
+                obscureText: true,
+                // validator: (String value) {
+                //   if (value.trim().isEmpty) {
+                //     return 'Password is required';
+                //   }
+                // },
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50.0),
@@ -100,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontSize: 20.0),
                   prefixIcon: const Icon(Icons.lock, color: Color(0xff2496AC)),
                 ),
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(color: Colors.white),
               ),
             ),
