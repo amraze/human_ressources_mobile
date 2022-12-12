@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '/body_containers/project_members.dart';
 import '/body_containers/projects.dart';
-import '/body_containers/profile/profile.dart';
+import '../body_containers/profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

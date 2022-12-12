@@ -1,113 +1,94 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../model/user.dart';
+import '/./utils/user_preferences.dart';
+import '/./widgets/button_widget.dart';
+import '/./widgets/numbers_widget.dart';
+import '/./widgets/profile_widget.dart';
+//import 'package:wassim_test/NavigationBar.dart';
 
 Widget buildProfilePage() {
-  return Padding(
-    padding: const EdgeInsets.all(10),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(140),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 10,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: const CircleAvatar(
-            radius: 120,
-            backgroundImage: AssetImage("assets/images/hedi.jpg"),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const Text(
-          "Hedi Sayadi",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(
-          height: 18,
-        ),
-        const Text("hedi.sayadi@supcom.com"),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              icon: const FaIcon(FontAwesomeIcons.github),
-              onPressed: () {},
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                ),
-              ),
-              label: const Text(
-                "GitHub",
-              ),
-            ),
-            const SizedBox(
-              width: 18,
-            ),
-            ElevatedButton.icon(
-              icon: const FaIcon(FontAwesomeIcons.linkedin),
-              onPressed: () {},
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                ),
-              ),
-              label: const Text(
-                "LinkedIn",
-              ),
-            ),
-            const SizedBox(
-              width: 18,
-            ),
-            ElevatedButton.icon(
-              icon: const FaIcon(FontAwesomeIcons.twitter),
-              onPressed: () {},
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                ),
-              ),
-              label: const Text(
-                "Twitter",
-              ),
-            ),
-            const SizedBox(
-              width: 18,
-            ),
+  const user = UserPreferences.myUser;
+
+  return Container(
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+          colors: [
+            Color(0xFF353445),
+            Color(0xFF1b1d2a),
           ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: [0.0, 1.0],
+          tileMode: TileMode.clamp),
+    ),
+    child: ListView(
+      physics: const BouncingScrollPhysics(),
+      children: [
+        const SizedBox(
+          height: 30,
         ),
+        ProfileWidget(
+          imagePath: user.imagePath,
+          onClicked: () async {},
+        ),
+        const SizedBox(height: 24),
+        buildName(user),
+        const SizedBox(height: 24),
+        Center(child: buildUpgradeButton()),
+        const SizedBox(height: 24),
+        const NumbersWidget(),
+        const SizedBox(height: 48),
+        buildAbout(user),
       ],
     ),
   );
 }
+
+Widget buildName(User user) => Column(
+      children: [
+        Text(
+          user.name,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          user.email,
+          style: const TextStyle(color: Color.fromARGB(255, 185, 185, 185)),
+        )
+      ],
+    );
+
+Widget buildUpgradeButton() => ButtonWidget(
+      text: 'Check Performance',
+      onClicked: () {},
+    );
+
+Widget buildAbout(User user) => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 48),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'About',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            user.about,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.4,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );

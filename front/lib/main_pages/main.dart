@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'login_screen.dart';
-import 'performance/performance.dart';
+import '../performance_utils/performance.dart';
 
 void main() {
   runApp(MaterialApp(initialRoute: '/login_screen', routes: {

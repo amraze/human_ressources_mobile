@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '/body_containers/profile/utils/user_preferences.dart';
+import '/utils/user_preferences.dart';
+import '/widgets/appbar_widget.dart';
 import 'tap_bar.dart';
-import 'package:mobile_project/body_containers/profile/widgets/appbar_widget.dart';
 
 class Performance extends StatefulWidget {
   const Performance({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   PerformanceState createState() => PerformanceState();
 }
 
