@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -41,6 +42,9 @@ class ProjectController extends Controller
             'deadline'           => $request->deadline,
             'category'           => $request->category,
         ]);
+        $user = User::find($request->user_id);
+        $project->users()->attach($user);
+        $project->users;
 
         return (response()->json($project));
     }
@@ -64,6 +68,10 @@ class ProjectController extends Controller
             'deadline'           => $request->deadline,
             'category'           => $request->category,
         ]);
+        $project->users()->detach();
+        $user = User::find($request->user_id);
+        $project->users()->attach($user);
+        $project->users;
 
         return (response()->json($project));
     }

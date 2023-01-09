@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->smallInteger('age')->default(21);
-            $table->tinyInteger('is_available')->default(1);
+            $table->tinyInteger('is_available')->default(1);   
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->tinyInteger('position')->default(0);
