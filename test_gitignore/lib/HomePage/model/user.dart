@@ -3,13 +3,21 @@ class User {
   final String name;
   final String email;
   final String about;
-  final String rating;
+  final dynamic monthlyrating;
+  final dynamic overallrating;
+  //final List projects;
+  //final List tasks;
+  final dynamic tasksperformance;
 
   const User({
     required this.imagePath,
     required this.name,
     required this.email,
     required this.about,
-    this.rating = '0',
+    this.monthlyrating,
+    this.overallrating,
+    //this.projects
+    //this.tasks;
+    this.tasksperformance,
   });
 }

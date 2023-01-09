@@ -4,6 +4,10 @@ import 'package:flutter/rendering.dart';
 import 'package:wassim_test/Performance/PerCard.dart';
 import 'package:wassim_test/Performance/PerCardMicro.dart';
 import 'package:wassim_test/Performance/PerCardMicro.dart';
+import 'package:wassim_test/HomePage/utils/user_preferences.dart';
+import 'dart:convert';
+
+const user = UserPreferences.myUser;
 
 const TextStyle optionStyle =
     TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
@@ -24,7 +28,9 @@ List<TabPair> TabPairs = [
         style: optionStyle,
       ),
     ),
-    view: const InfoCard(),
+    view: InfoCard(
+      performance: user.monthlyrating,
+    ),
   ),
   TabPair(
     tab: const Tab(
@@ -33,7 +39,9 @@ List<TabPair> TabPairs = [
         style: optionStyle,
       ),
     ),
-    view: const InfoCard(),
+    view: InfoCard(
+      performance: user.overallrating,
+    ),
   ),
 ];
 

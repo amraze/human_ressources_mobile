@@ -17,7 +17,7 @@ class SliderFb3 extends StatefulWidget {
       {required this.min,
       required this.max,
       required this.divisions,
-      this.initialValue = 0,
+      required this.initialValue,
       this.accentColor = Colors.white,
       this.gradient = const LinearGradient(colors: [
         Color.fromARGB(255, 71, 164, 218),
@@ -93,7 +93,7 @@ class _SliderFb3State extends State<SliderFb3> {
                   onChanged: (value) {
                     //Making the Slide fix in one value *************************************************
                     setState(() {
-                      _currentSliderValue = user.rating as double;
+                      _currentSliderValue = user.monthlyrating;
                     });
                   },
                 ),

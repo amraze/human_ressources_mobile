@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MicroCard extends StatelessWidget {
-  final String taskPer;
-  final String subInfoTitle;
+  final dynamic taskPer;
+  final dynamic subInfoTitle;
   final Widget subIcon;
 
   const MicroCard(

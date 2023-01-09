@@ -1,13 +1,27 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:wassim_test/Performance/PerCardMicro.dart';
 import 'package:wassim_test/Performance/TapBar.dart';
 import 'package:wassim_test/Performance/Rating.dart';
+import 'package:wassim_test/HomePage/utils/user_preferences.dart';
+
+const user = UserPreferences.myUser;
 
 class InfoCard extends StatelessWidget {
-  const InfoCard({super.key});
+  final double performance;
+  //final List tasks;
+
+  const InfoCard(
+      {required this.performance,
+      //required this.tasks,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    dynamic usertaskper;
+    dynamic infotitle;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -18,6 +32,7 @@ class InfoCard extends StatelessWidget {
                 divisions: 100,
                 max: 100,
                 min: 0,
+                initialValue: performance,
               )),
           Container(
             padding: const EdgeInsets.only(
@@ -51,7 +66,7 @@ class InfoCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: Column(
-                  children: const [
+                  children: [
                     Center(
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
@@ -61,7 +76,7 @@ class InfoCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    MicroCard(
+                    /*MicroCard(
                       taskPer: '85%',
                       subInfoTitle: 'The first task',
                     ),
@@ -100,7 +115,13 @@ class InfoCard extends StatelessWidget {
                     MicroCard(
                       taskPer: '85%',
                       subInfoTitle: 'The first task',
-                    ),
+                    ),*/
+                    for (var key in user.tasksperformance.keys) ...[
+                      MicroCard(
+                        taskPer: user.tasksperformance[key],
+                        subInfoTitle: key,
+                      ),
+                    ],
                   ],
                 ),
               ),
