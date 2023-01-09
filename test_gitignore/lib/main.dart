@@ -39,7 +39,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     //FIRST PAGE : HOME ++++++++++++++++++++++++++++++++++++++++++++
     const ProfilePage(),
     // SECOND PAGE: TASKS ++++++++++++++++++++++++++++++++++++++++
-    const TabBarAndTabViews(),
+    const Text(
+      'Index 1: Tasks',
+      style: optionStyle,
+    ),
     // THIRD PAGE: CALANDER +++++++++++++++++++++++++++++++++++++
     const Text(
       'Index 2: Calander',
