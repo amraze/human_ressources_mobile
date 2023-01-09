@@ -33,16 +33,7 @@ List<TabPair> TabPairs = [
         style: optionStyle,
       ),
     ),
-    view: const Center(
-      // replace with your own widget here
-      child: Text(
-        'Ingredients here',
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    ),
+    view: const InfoCard(),
   ),
 ];
 
