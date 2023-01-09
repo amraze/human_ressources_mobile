@@ -19,8 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('project_id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('leader_grade');
-            $table->integer('date_grade');
+            $table->integer('grade');
             $table->date('start_date')->default(now());
             $table->date('end_date')->nullable();
             $table->date('deadline')->nullable();
