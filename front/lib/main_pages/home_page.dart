@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import '/body_containers/members.dart';
 import '/./utils/user_preferences.dart';
+import '/./utils/general_Info_preferences.dart';
 import '/body_containers/projects.dart';
 import '../body_containers/profile.dart';
 import '../body_containers/tasks.dart';
 
+// username which is a project leader
+String username = "";
+var generalInfo = GeneralInfoPreferences.myGeneralInfo;
 var user = UserPreferences.myUser;
 
 class HomePage extends StatefulWidget {
@@ -34,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       // Profile
       buildProfilePage(context),
       // Current Project
-      roleIsLeader ? const Members() : const Tasks(),
+      generalInfo.isRoleLeader ? const Members() : const Tasks(),
       // Projects
       const Projects(),
     ];

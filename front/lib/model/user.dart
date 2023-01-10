@@ -5,11 +5,11 @@ class User {
   String name;
   String email;
   String about;
+  int age;
   double monthlyrating;
   double overallrating;
   List<List<List<String>>> tasksInfo;
   List<String> membersList;
-  List<String> projectsList;
   //final List tasks;
   dynamic tasksperformance;
 
@@ -18,12 +18,13 @@ class User {
     required this.name,
     required this.email,
     required this.about,
+    required this.age,
     this.monthlyrating = 0.0,
     this.overallrating = 0.0,
     required this.tasksInfo,
-    required this.membersList,
-    required this.projectsList,
     required this.projectImagePath,
+    required this.membersList,
+
     //this.tasks;
     this.tasksperformance,
   });

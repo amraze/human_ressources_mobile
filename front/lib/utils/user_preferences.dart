@@ -2,19 +2,13 @@ import '/./model/user.dart';
 
 class UserPreferences {
   static var myUser = User(
+      age: 22,
       imagePath:
           'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200',
       name: 'Mohamed Naski',
       email: 'Mohamed.naski@supcom.tn',
       about:
           'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.',
-      projectsList: [
-        "Project 1",
-        "Project 2",
-        "Project 3",
-        "Project 4",
-        "Project 5",
-      ],
       projectImagePath:
           'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200',
       membersList: ["Member 1", "Member2", "Member3", "Member4", "Member5"],
