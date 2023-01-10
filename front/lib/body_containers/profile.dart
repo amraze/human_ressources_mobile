@@ -6,9 +6,8 @@ import '/./widgets/numbers_widget.dart';
 import '/./widgets/profile_widget.dart';
 //import 'package:wassim_test/NavigationBar.dart';
 
-Widget buildProfilePage() {
+Widget buildProfilePage(BuildContext context) {
   const user = UserPreferences.myUser;
-
   return Container(
     decoration: const BoxDecoration(
       gradient: LinearGradient(
@@ -34,7 +33,7 @@ Widget buildProfilePage() {
         const SizedBox(height: 24),
         buildName(user),
         const SizedBox(height: 24),
-        Center(child: buildUpgradeButton()),
+        Center(child: buildUpgradeButton(context)),
         const SizedBox(height: 24),
         const NumbersWidget(),
         const SizedBox(height: 48),
@@ -62,9 +61,11 @@ Widget buildName(User user) => Column(
       ],
     );
 
-Widget buildUpgradeButton() => ButtonWidget(
+Widget buildUpgradeButton(BuildContext context) => ButtonWidget(
       text: 'Check Performance',
-      onClicked: () {},
+      onClicked: () {
+        Navigator.pushNamed(context, "/performance");
+      },
     );
 
 Widget buildAbout(User user) => Container(
