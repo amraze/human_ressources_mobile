@@ -5,6 +5,8 @@ class User {
   final String about;
   final double monthlyrating;
   final double overallrating;
+  final List<List<List<String>>> tasksInfo;
+  final List<String> membersList;
   //final List projects;
   //final List tasks;
   final dynamic tasksperformance;
@@ -16,6 +18,8 @@ class User {
     required this.about,
     this.monthlyrating = 0.0,
     this.overallrating = 0.0,
+    required this.tasksInfo,
+    required this.membersList,
     //this.projects
     //this.tasks;
     this.tasksperformance,

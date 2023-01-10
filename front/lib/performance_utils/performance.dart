@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '/./utils/user_preferences.dart';
 import '/./widgets/appbar_widget.dart';
-
 import 'TapBar.dart';
 
 class PerPage extends StatefulWidget {

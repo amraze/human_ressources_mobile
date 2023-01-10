@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '/body_containers/members.dart';
+import '/./utils/user_preferences.dart';
 import '/body_containers/project_members.dart';
 import '/body_containers/projects.dart';
 import '../body_containers/profile.dart';
 import '../body_containers/tasks.dart';
+
+const user = UserPreferences.myUser;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,33 +26,10 @@ class _HomePageState extends State<HomePage> {
     radius: 80,
     backgroundImage: AssetImage('assets/images/nasski.png'),
   );
-  List<List<List<String>>> tasksInfo = [
-    [
-      ["ToDo 1", "01/02/2022", "02/02/2022", "This is task ToDo1"],
-      ["ToDo 2", "01/03/2022", "02/03/2022", "This is task ToDo2"]
-    ],
-    [
-      [
-        "In Progress 1",
-        "01/02/2022",
-        "02/02/2022",
-        "This is task In Progress1"
-      ],
-      ["In Progress 2", "01/03/2022", "02/03/2022", "This is task In Progress2"]
-    ],
-    [
-      ["To Review 1", "01/02/2022", "02/02/2022", "This is task To Review 1"],
-      ["To Review 2", "01/03/2022", "02/03/2022", "This is task To Review 2"]
-    ],
-    [
-      ["Completed 1", "01/02/2022", "02/02/2022", "This is task Completed 1"],
-      ["Completed 2", "01/03/2022", "02/03/2022", "This is task Completed 2"]
-    ]
-  ];
 
   // User name
   String username = "";
-
+  bool roleIsLeader = true;
   // List of Projects username is a leader in
   List<String> Projects = [];
 
@@ -57,14 +37,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final List<Widget> _widgetOptions = <Widget>[
       // Profile
-      //buildTaskForm(context),
       buildProfilePage(context),
 
-      //Tasks(tasksInfo: tasksInfo),
-
-      // Current Project tasks
-      buildProjectMembersPage(context),
-
+      // Current Project
+      roleIsLeader
+          ? Members(
+              membersList: user.membersList,
+              memberImageURL: user.imagePath,
+            )
+          : Tasks(tasksInfo: tasksInfo),
       // Projects
       buildProjectsPage(context),
     ];

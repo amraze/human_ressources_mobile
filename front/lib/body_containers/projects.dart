@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'project_members.dart';
+//import 'project_members.dart';
 
 // List of Projectss username is leader in
 List<String> projectsList = [
@@ -31,7 +31,7 @@ Widget buildProjectsPage(BuildContext context) {
             itemBuilder: (context, index) {
               final name = projectsList[index];
 
-              return buildProjectCard(context, name, memberImageURL);
+              return buildProjectCard(context, name, projectImageURL);
             },
           )));
 }
@@ -55,6 +55,7 @@ Widget buildProjectCard(
                 //
                 //
                 // buildProjectMembersPage
+                Navigator.pushNamed(context, 'members');
               },
               child: Column(
                 children: [

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'project_members.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
 import 'task_form.dart';
 
 class Tasks extends StatefulWidget {
-  const Tasks({super.key, required this.tasksInfo});
-
   final List<List<List<String>>> tasksInfo;
+
+  const Tasks({required this.tasksInfo, Key? key}) : super(key: key);
 
   @override
   State<Tasks> createState() => TasksState();
