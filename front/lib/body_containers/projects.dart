@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/./utils/user_preferences.dart';
 import '/./utils/general_Info_preferences.dart';
+import '/./utils/project_preferences.dart';
 
 // username which is a project leader
 String username = "";
 var generalInfo = GeneralInfoPreferences.myGeneralInfo;
 var user = UserPreferences.myUser;
+var projectPreferences = ProjectPreferences.myProject;
 
 class Projects extends StatelessWidget {
   const Projects({Key? key}) : super(key: key);
@@ -24,7 +26,8 @@ class Projects extends StatelessWidget {
           itemCount: generalInfo.projectsList.length,
           itemBuilder: (context, index) {
             final name = generalInfo.projectsList[index];
-            return buildProjectCard(context, name, user.projectImagePath);
+            return buildProjectCard(
+                context, name, projectPreferences.projectImagePath);
           },
         ));
   }

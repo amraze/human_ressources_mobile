@@ -1,6 +1,5 @@
 class User {
   String imagePath;
-  String projectImagePath;
 
   String name;
   String email;
@@ -9,8 +8,7 @@ class User {
   double monthlyrating;
   double overallrating;
   List<List<List<String>>> tasksInfo;
-  List<String> membersList;
-  //final List tasks;
+
   dynamic tasksperformance;
 
   User({
@@ -22,10 +20,6 @@ class User {
     this.monthlyrating = 0.0,
     this.overallrating = 0.0,
     required this.tasksInfo,
-    required this.projectImagePath,
-    required this.membersList,
-
-    //this.tasks;
     this.tasksperformance,
   });
 }

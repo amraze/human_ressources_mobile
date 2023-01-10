@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_project/body_containers/projects.dart';
+import '/./utils/project_preferences.dart';
+
+var projectPreferences = ProjectPreferences.myProject;
 
 class Members extends StatelessWidget {
   const Members({Key? key}) : super(key: key);
@@ -15,9 +18,9 @@ class Members extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
       child: ListView.builder(
-        itemCount: user.membersList.length,
+        itemCount: projectPreferences.membersList.length,
         itemBuilder: (context, index) {
-          final name = user.membersList[index];
+          final name = projectPreferences.membersList[index];
 
           return buildMemberCard(context, name, user.imagePath);
         },

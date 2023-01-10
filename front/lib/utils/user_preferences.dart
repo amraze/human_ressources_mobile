@@ -9,9 +9,7 @@ class UserPreferences {
       email: 'Mohamed.naski@supcom.tn',
       about:
           'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.',
-      projectImagePath:
-          'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200',
-      membersList: ["Member 1", "Member2", "Member3", "Member4", "Member5"],
+      
       monthlyrating: 69.0,
       overallrating: 89.0,
       tasksperformance: {
