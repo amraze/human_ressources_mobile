@@ -21,19 +21,21 @@ class TasksState extends State<Tasks> {
   @override
   Widget build(BuildContext context) {
     _tasksInfos = widget.tasksInfo;
-    return Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[Color(0xff373447), Color(0xff1F1E2B)])),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: cards.length,
-          itemBuilder: (context, index) {
-            if (index < cards.length) return _buildCard(context, index);
-          },
-        ));
+    return Scaffold(
+      body: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[Color(0xff373447), Color(0xff1F1E2B)])),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: cards.length,
+            itemBuilder: (context, index) {
+              if (index < cards.length) return _buildCard(context, index);
+            },
+          )),
+    );
   }
 
   Widget buildTaskCard(String projectName, String imageURL) => Card(

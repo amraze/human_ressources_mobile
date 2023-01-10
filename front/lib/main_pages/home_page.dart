@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '/body_containers/members.dart';
 import '/./utils/user_preferences.dart';
-import '/body_containers/project_members.dart';
 import '/body_containers/projects.dart';
 import '../body_containers/profile.dart';
 import '../body_containers/tasks.dart';
 
 const user = UserPreferences.myUser;
+List<String> _projectsList = [
+  "Project 1",
+  "Project 2",
+  "Project 3",
+  "Project 4",
+  "Project 5",
+];
+String _projectImageURL =
+    'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,7 +38,6 @@ class _HomePageState extends State<HomePage> {
   String username = "";
   bool roleIsLeader = true;
   // List of Projects username is a leader in
-  List<String> Projects = [];
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +51,12 @@ class _HomePageState extends State<HomePage> {
               membersList: user.membersList,
               memberImageURL: user.imagePath,
             )
-          : Tasks(tasksInfo: tasksInfo),
+          : Tasks(tasksInfo: user.tasksInfo),
       // Projects
-      buildProjectsPage(context),
+      Projects(
+        projectsList: _projectsList,
+        projectImageURL: _projectImageURL,
+      ),
     ];
 
     void _onItemTapped(int index) {
@@ -55,7 +64,6 @@ class _HomePageState extends State<HomePage> {
           ? _drawerKey.currentState?.openDrawer()
           : setState(() {
               _selectedIndex = index;
-              //updateRouting(context);
             });
     }
 
