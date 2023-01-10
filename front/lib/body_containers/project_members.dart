@@ -70,6 +70,12 @@ Widget buildMemberCard(
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 //
                 //
+
+                Navigator.pushNamed(
+                  context,
+                  '/otherscreen',
+                  arguments: {'exampleArgument': tasksInfo},
+                );
                 //
                 //
                 //

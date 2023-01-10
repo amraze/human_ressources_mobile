@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'per_card.dart';
+import '/./utils/user_preferences.dart';
+import '/./performance_utils/PerCard.dart';
+
+const user = UserPreferences.myUser;
 
 const TextStyle optionStyle =
     TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
@@ -10,7 +13,6 @@ class TabPair {
   TabPair({required this.tab, required this.view});
 }
 
-// ignore: non_constant_identifier_names
 List<TabPair> TabPairs = [
   TabPair(
     // ignore: prefer_const_constructors
@@ -20,7 +22,10 @@ List<TabPair> TabPairs = [
         style: optionStyle,
       ),
     ),
-    view: const PerCard(),
+    view: InfoCard(
+      performance: user.monthlyrating ,
+
+    ),
   ),
   TabPair(
     tab: const Tab(
@@ -29,15 +34,8 @@ List<TabPair> TabPairs = [
         style: optionStyle,
       ),
     ),
-    view: const Center(
-      // replace with your own widget here
-      child: Text(
-        'Ingredients here',
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
+    view: InfoCard(
+      performance: user.overallrating,
     ),
   ),
 ];
@@ -46,7 +44,6 @@ class TabBarAndTabViews extends StatefulWidget {
   const TabBarAndTabViews({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _TabBarAndTabViewsState createState() => _TabBarAndTabViewsState();
 }
 

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import '/utils/user_preferences.dart';
-import '/widgets/appbar_widget.dart';
-import 'tap_bar.dart';
+import '/./utils/user_preferences.dart';
+import '/./widgets/appbar_widget.dart';
 
-class Performance extends StatefulWidget {
-  const Performance({super.key});
+import 'TapBar.dart';
+
+class PerPage extends StatefulWidget {
+  const PerPage({super.key});
 
   @override
-  PerformanceState createState() => PerformanceState();
+  _PerPageState createState() => _PerPageState();
 }
 
-class PerformanceState extends State<Performance> {
+class _PerPageState extends State<PerPage> {
   @override
   Widget build(BuildContext context) {
     const user = UserPreferences.myUser;

@@ -58,9 +58,9 @@ class _HomePageState extends State<HomePage> {
     final List<Widget> _widgetOptions = <Widget>[
       // Profile
       //buildTaskForm(context),
-      //buildProfilePage(context),
+      buildProfilePage(context),
 
-      Tasks(tasksInfo: tasksInfo),
+      //Tasks(tasksInfo: tasksInfo),
 
       // Current Project tasks
       buildProjectMembersPage(context),

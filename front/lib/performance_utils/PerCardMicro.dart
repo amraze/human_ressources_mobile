@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class PerCardMicro extends StatelessWidget {
-  final String taskPer;
-  final String subInfoTitle;
+class MicroCard extends StatelessWidget {
+  final dynamic taskPer;
+  final dynamic subInfoTitle;
   final Widget subIcon;
 
-  const PerCardMicro(
+  const MicroCard(
       {this.subIcon = const CircleAvatar(
         backgroundColor: Color.fromARGB(255, 48, 179, 255),
         radius: 25,
