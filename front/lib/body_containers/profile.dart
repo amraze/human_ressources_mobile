@@ -7,7 +7,7 @@ import '/./widgets/profile_widget.dart';
 //import 'package:wassim_test/NavigationBar.dart';
 
 Widget buildProfilePage(BuildContext context) {
-  const user = UserPreferences.myUser;
+  var user = UserPreferences.myUser;
   return Container(
     decoration: const BoxDecoration(
       gradient: LinearGradient(

@@ -6,17 +6,14 @@ import '/./body_containers/members.dart';
 import '../performance_utils/Performance.dart';
 import '/./utils/user_preferences.dart';
 
-const user = UserPreferences.myUser;
+var user = UserPreferences.myUser;
 
 void main() {
   runApp(MaterialApp(initialRoute: '/login_screen', routes: {
     '/home_page': (context) => const HomePage(),
     '/login_screen': (context) => const LoginScreen(),
     '/performance': (context) => const PerPage(),
-    '/tasks': (context) => Tasks(tasksInfo: user.tasksInfo),
-    'members': (context) => Members(
-          membersList: user.membersList,
-          memberImageURL: user.imagePath,
-        )
+    '/tasks': (context) => const Tasks(),
+    'members': (context) => const Members()
   }));
 }

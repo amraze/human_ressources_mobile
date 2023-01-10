@@ -1,17 +1,19 @@
 class User {
-  final String imagePath;
-  final String name;
-  final String email;
-  final String about;
-  final double monthlyrating;
-  final double overallrating;
-  final List<List<List<String>>> tasksInfo;
-  final List<String> membersList;
-  //final List projects;
-  //final List tasks;
-  final dynamic tasksperformance;
+  String imagePath;
+  String projectImagePath;
 
-  const User({
+  String name;
+  String email;
+  String about;
+  double monthlyrating;
+  double overallrating;
+  List<List<List<String>>> tasksInfo;
+  List<String> membersList;
+  List<String> projectsList;
+  //final List tasks;
+  dynamic tasksperformance;
+
+  User({
     required this.imagePath,
     required this.name,
     required this.email,
@@ -20,7 +22,8 @@ class User {
     this.overallrating = 0.0,
     required this.tasksInfo,
     required this.membersList,
-    //this.projects
+    required this.projectsList,
+    required this.projectImagePath,
     //this.tasks;
     this.tasksperformance,
   });

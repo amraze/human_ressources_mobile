@@ -13,7 +13,7 @@ class PerPage extends StatefulWidget {
 class _PerPageState extends State<PerPage> {
   @override
   Widget build(BuildContext context) {
-    const user = UserPreferences.myUser;
+    var user = UserPreferences.myUser;
 
     return Scaffold(
         backgroundColor: const Color.fromRGBO(55, 52, 71, 1),

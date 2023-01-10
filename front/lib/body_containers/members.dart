@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_project/body_containers/projects.dart';
 
 class Members extends StatelessWidget {
-  final List<String> membersList;
-  final String memberImageURL;
-
-  const Members(
-      {required this.membersList, required this.memberImageURL, Key? key})
-      : super(key: key);
+  const Members({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,11 +15,11 @@ class Members extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
       child: ListView.builder(
-        itemCount: membersList.length,
+        itemCount: user.membersList.length,
         itemBuilder: (context, index) {
-          final name = membersList[index];
+          final name = user.membersList[index];
 
-          return buildMemberCard(context, name, memberImageURL);
+          return buildMemberCard(context, name, user.imagePath);
         },
       ),
     );
@@ -41,12 +37,6 @@ class Members extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  const snackBar = SnackBar(
-                    content: Text('Yay! A SnackBar!'),
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
                   Navigator.pushNamed(
                     context,
                     '/tasks',

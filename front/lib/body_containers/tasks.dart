@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
 import 'task_form.dart';
+import '/./utils/user_preferences.dart';
+
+var user = UserPreferences.myUser;
 
 class Tasks extends StatefulWidget {
-  final List<List<List<String>>> tasksInfo;
-
-  const Tasks({required this.tasksInfo, Key? key}) : super(key: key);
+  const Tasks({Key? key}) : super(key: key);
 
   @override
   State<Tasks> createState() => TasksState();
@@ -16,11 +17,9 @@ class TasksState extends State<Tasks> {
   static const TextStyle taskInfoStyle =
       TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white);
   List<String> cards = ["ToDo", "In Progress", "To Review", "Completed"];
-  List<List<List<String>>> _tasksInfos = [];
 
   @override
   Widget build(BuildContext context) {
-    _tasksInfos = widget.tasksInfo;
     return Scaffold(
       body: Container(
           decoration: const BoxDecoration(
@@ -128,10 +127,10 @@ class TasksState extends State<Tasks> {
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.6,
                     child: DragAndDropList<List<String>>(
-                      _tasksInfos[index],
+                      user.tasksInfo[index],
                       itemBuilder: (BuildContext context, item) {
                         return _buildCardTask(
-                            index, _tasksInfos[index].indexOf(item));
+                            index, user.tasksInfo[index].indexOf(item));
                       },
                       onDragFinish: (oldIndex, newIndex) {
                         _handleReOrder(oldIndex, newIndex, index);
@@ -155,8 +154,8 @@ class TasksState extends State<Tasks> {
                 if (data['from'] == index) {
                   return;
                 }
-                _tasksInfos[data['from']].remove(data['cardInfoList']);
-                _tasksInfos[index].add(data['cardInfoList']);
+                user.tasksInfo[data['from']].remove(data['cardInfoList']);
+                user.tasksInfo[index].add(data['cardInfoList']);
                 setState(() {});
               },
               builder: (context, accept, reject) {
@@ -192,24 +191,24 @@ class TasksState extends State<Tasks> {
                           padding: const EdgeInsets.all(20),
                           child: Column(
                             children: [
-                              Text(_tasksInfos[index][innerIndex][0],
+                              Text(user.tasksInfo[index][innerIndex][0],
                                   style: taskInfoStyle),
                               const SizedBox(
                                 height: 15,
                               ),
                               Text(
-                                  'Begin Date: ${_tasksInfos[index][innerIndex][1]}',
+                                  'Begin Date: ${user.tasksInfo[index][innerIndex][1]}',
                                   style: taskInfoStyle),
                               const SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                  'Deadline: ${_tasksInfos[index][innerIndex][2]}',
+                                  'Deadline: ${user.tasksInfo[index][innerIndex][2]}',
                                   style: taskInfoStyle),
                               const SizedBox(
                                 height: 15,
                               ),
-                              Text(_tasksInfos[index][innerIndex][3],
+                              Text(user.tasksInfo[index][innerIndex][3],
                                   style: taskInfoStyle),
                             ],
                           )),
@@ -218,7 +217,10 @@ class TasksState extends State<Tasks> {
                 )),
           ),
           childWhenDragging: Container(),
-          data: {"from": index, "cardInfoList": _tasksInfos[index][innerIndex]},
+          data: {
+            "from": index,
+            "cardInfoList": user.tasksInfo[index][innerIndex]
+          },
           child: Card(
               color: Color.fromARGB(255, 31, 31, 42),
               clipBehavior: Clip.antiAlias,
@@ -233,24 +235,24 @@ class TasksState extends State<Tasks> {
                         padding: const EdgeInsets.all(20),
                         child: Column(
                           children: [
-                            Text(_tasksInfos[index][innerIndex][0],
+                            Text(user.tasksInfo[index][innerIndex][0],
                                 style: taskInfoStyle),
                             const SizedBox(
                               height: 15,
                             ),
                             Text(
-                                'Begin Date: ${_tasksInfos[index][innerIndex][1]}',
+                                'Begin Date: ${user.tasksInfo[index][innerIndex][1]}',
                                 style: taskInfoStyle),
                             const SizedBox(
                               height: 10,
                             ),
                             Text(
-                                'Deadline: ${_tasksInfos[index][innerIndex][2]}',
+                                'Deadline: ${user.tasksInfo[index][innerIndex][2]}',
                                 style: taskInfoStyle),
                             const SizedBox(
                               height: 15,
                             ),
-                            Text(_tasksInfos[index][innerIndex][3],
+                            Text(user.tasksInfo[index][innerIndex][3],
                                 style: taskInfoStyle),
                           ],
                         )),
@@ -283,7 +285,7 @@ class TasksState extends State<Tasks> {
     String deadline = deadlineInput.text;
     String description = descriptionInput.text;
     List<String> cardInfoList = [name, beginDate, deadline, description];
-    _tasksInfos[index].add(cardInfoList);
+    user.tasksInfo[index].add(cardInfoList);
     taskNameInput.text = "";
     beginDateInput.text = "";
     deadlineInput.text = "";
@@ -291,9 +293,9 @@ class TasksState extends State<Tasks> {
   }
 
   _handleReOrder(int oldIndex, int newIndex, int index) {
-    var oldValue = _tasksInfos[index][oldIndex];
-    _tasksInfos[index][oldIndex] = _tasksInfos[index][newIndex];
-    _tasksInfos[index][newIndex] = oldValue;
+    var oldValue = user.tasksInfo[index][oldIndex];
+    user.tasksInfo[index][oldIndex] = user.tasksInfo[index][newIndex];
+    user.tasksInfo[index][newIndex] = oldValue;
     setState(() {});
   }
 }

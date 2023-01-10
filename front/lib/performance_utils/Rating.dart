@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/./utils/user_preferences.dart';
 
-const user = UserPreferences.myUser;
+var user = UserPreferences.myUser;
 
 class SliderFb3 extends StatefulWidget {
   final double min;

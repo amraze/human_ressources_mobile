@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '/./utils/user_preferences.dart';
 import '/./performance_utils/PerCard.dart';
 
-const user = UserPreferences.myUser;
+var user = UserPreferences.myUser;
 
 const TextStyle optionStyle =
     TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);

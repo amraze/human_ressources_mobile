@@ -5,16 +5,7 @@ import '/body_containers/projects.dart';
 import '../body_containers/profile.dart';
 import '../body_containers/tasks.dart';
 
-const user = UserPreferences.myUser;
-List<String> _projectsList = [
-  "Project 1",
-  "Project 2",
-  "Project 3",
-  "Project 4",
-  "Project 5",
-];
-String _projectImageURL =
-    'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200';
+var user = UserPreferences.myUser;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -37,7 +28,6 @@ class _HomePageState extends State<HomePage> {
   // User name
   String username = "";
   bool roleIsLeader = true;
-  // List of Projects username is a leader in
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +36,9 @@ class _HomePageState extends State<HomePage> {
       buildProfilePage(context),
 
       // Current Project
-      roleIsLeader
-          ? Members(
-              membersList: user.membersList,
-              memberImageURL: user.imagePath,
-            )
-          : Tasks(tasksInfo: user.tasksInfo),
+      roleIsLeader ? const Members() : const Tasks(),
       // Projects
-      Projects(
-        projectsList: _projectsList,
-        projectImageURL: _projectImageURL,
-      ),
+      const Projects(),
     ];
 
     void _onItemTapped(int index) {

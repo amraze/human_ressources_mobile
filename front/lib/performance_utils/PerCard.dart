@@ -4,7 +4,7 @@ import '/./performance_utils/TapBar.dart';
 import '/./performance_utils/Rating.dart';
 import '/./utils/user_preferences.dart';
 
-const user = UserPreferences.myUser;
+var user = UserPreferences.myUser;
 
 class InfoCard extends StatelessWidget {
   final double performance;

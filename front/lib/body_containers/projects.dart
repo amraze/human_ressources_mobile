@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_project/utils/user_preferences.dart';
 
 // username which is a project leader
 String username = "";
+var user = UserPreferences.myUser;
 
 class Projects extends StatelessWidget {
-  final List<String> projectsList;
-  final String projectImageURL;
-
-  const Projects(
-      {required this.projectsList, required this.projectImageURL, Key? key})
-      : super(key: key);
+  const Projects({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,10 +19,10 @@ class Projects extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
         child: ListView.builder(
-          itemCount: projectsList.length,
+          itemCount: user.projectsList.length,
           itemBuilder: (context, index) {
-            final name = projectsList[index];
-            return buildProjectCard(context, name, projectImageURL);
+            final name = user.projectsList[index];
+            return buildProjectCard(context, name, user.projectImagePath);
           },
         ));
   }
