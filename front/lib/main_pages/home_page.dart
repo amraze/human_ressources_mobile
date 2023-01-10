@@ -16,10 +16,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
-  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-
   static const circleAvatar = CircleAvatar(
     radius: 80,
     backgroundImage: AssetImage('assets/images/nasski.png'),
@@ -34,7 +33,6 @@ class _HomePageState extends State<HomePage> {
     final List<Widget> _widgetOptions = <Widget>[
       // Profile
       buildProfilePage(context),
-
       // Current Project
       roleIsLeader ? const Members() : const Tasks(),
       // Projects
