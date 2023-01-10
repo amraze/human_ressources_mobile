@@ -1,3 +1,4 @@
+
 import '/./model/general_info.dart';
 
 class GeneralInfoPreferences {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/body_containers/members.dart';
 import '/./utils/user_preferences.dart';
-import '/./utils/general_Info_preferences.dart';
+import '/./utils/general_info_preferences.dart';
 import '/body_containers/projects.dart';
 import '../body_containers/profile.dart';
 import '../body_containers/tasks.dart';
