@@ -1,4 +1,3 @@
-
 import '/./model/general_info.dart';
 
 class GeneralInfoPreferences {
@@ -8,5 +7,5 @@ class GeneralInfoPreferences {
     "Project 3",
     "Project 4",
     "Project 5",
-  ], isRoleLeader: true);
+  ], isRoleLeader: false);
 }

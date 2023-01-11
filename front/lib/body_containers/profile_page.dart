@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../model/user.dart';
+import '../model/users.dart';
 import '/./utils/user_preferences.dart';
 import '/./widgets/button_widget.dart';
 import '/./widgets/numbers_widget.dart';
 import '/./widgets/profile_widget.dart';
-//import 'package:wassim_test/NavigationBar.dart';
+import 'package:http/http.dart' as http;
+import 'package:mobile_project/main_pages/home_page.dart';
 
 Widget buildProfilePage(BuildContext context) {
-  var user = UserPreferences.myUser;
   return Container(
     decoration: const BoxDecoration(
       gradient: LinearGradient(
@@ -27,26 +27,26 @@ Widget buildProfilePage(BuildContext context) {
           height: 30,
         ),
         ProfileWidget(
-          imagePath: user.imagePath,
+          imagePath: profile.imagePath,
           onClicked: () async {},
         ),
         const SizedBox(height: 24),
-        buildName(user),
+        buildName(),
         const SizedBox(height: 24),
         Center(child: buildUpgradeButton(context)),
         const SizedBox(height: 24),
         const NumbersWidget(),
         const SizedBox(height: 48),
-        buildAbout(user),
+        buildAbout(),
       ],
     ),
   );
 }
 
-Widget buildName(User user) => Column(
+Widget buildName() => Column(
       children: [
         Text(
-          user.name,
+          profile.name,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
@@ -55,7 +55,7 @@ Widget buildName(User user) => Column(
         ),
         const SizedBox(height: 4),
         Text(
-          user.email,
+          profile.email,
           style: const TextStyle(color: Color.fromARGB(255, 185, 185, 185)),
         )
       ],
@@ -68,7 +68,7 @@ Widget buildUpgradeButton(BuildContext context) => ButtonWidget(
       },
     );
 
-Widget buildAbout(User user) => Container(
+Widget buildAbout() => Container(
       padding: const EdgeInsets.symmetric(horizontal: 48),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +83,7 @@ Widget buildAbout(User user) => Container(
           ),
           const SizedBox(height: 16),
           Text(
-            user.about,
+            profile.about,
             style: const TextStyle(
               fontSize: 16,
               height: 1.4,

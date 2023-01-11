@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_project/model/Profile.dart';
 import '/./utils/user_preferences.dart';
 import '/./utils/general_info_preferences.dart';
 import '/./utils/project_preferences.dart';
+import 'package:mobile_project/main_pages/home_page.dart';
 
 // username which is a project leader
 String username = "";

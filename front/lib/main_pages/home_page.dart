@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_project/utils/profile_preferences.dart';
 import '/body_containers/members.dart';
-import '/./utils/user_preferences.dart';
 import '/./utils/general_info_preferences.dart';
 import '/body_containers/projects.dart';
-import '../body_containers/profile.dart';
+import '../body_containers/profile_page.dart';
+import '../model/profile.dart';
+import 'dart:convert';
 import '../body_containers/tasks.dart';
+import '../model/profile_api.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
+Profile profile = ProfilePreferences.myProfile;
 // username which is a project leader
 String username = "";
 var generalInfo = GeneralInfoPreferences.myGeneralInfo;
-var user = UserPreferences.myUser;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +24,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void getUsersfromApi() async {
+    final response =
+        await http.get(Uri.parse('https://supcomje.tn/mobile/api/users'));
+    setState(() {
+      var x = json.decode(response.body);
+      List a = x.toList();
+      profile = Profile.fromJson(a[0]);
+    });
+  }
+
+  ///////////////////////////////
+  @override
+  void initState() {
+    super.initState();
+    getUsersfromApi();
+  }
+
+  ////////////////////////////////
+
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   static const TextStyle optionStyle =
