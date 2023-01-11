@@ -11,7 +11,7 @@ class ProfileApi {
   }
 
   static Future login(String email, String password) async {
-    http.post(Uri.parse('https://supcomje.tn/mobile/api/users'), headers: {
+    http.post(Uri.parse('https://supcomje.tn/mobile/api/login'), headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     }, body: {
       'email': email,

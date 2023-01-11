@@ -57,16 +57,6 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 44.0,
             ),
-
-            /////
-            ///
-            ////
-            ///
-            ///
-            ///
-            ///
-            ///
-            ///
             Form(
               key: _formKey,
               child: Padding(
@@ -157,9 +147,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-
-            //9dim
-
             SizedBox(
               width: 280.0,
               height: 65,
