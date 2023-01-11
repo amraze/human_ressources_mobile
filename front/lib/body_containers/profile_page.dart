@@ -35,7 +35,7 @@ Widget buildProfilePage(BuildContext context) {
         const SizedBox(height: 24),
         Center(child: buildUpgradeButton(context)),
         const SizedBox(height: 24),
-        const NumbersWidget(),
+        NumbersWidget(age: profile.age),
         const SizedBox(height: 48),
         buildAbout(),
       ],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NumbersWidget extends StatelessWidget {
-  const NumbersWidget({super.key});
+  final age;
+  const NumbersWidget({required this.age, super.key});
 
   @override
   Widget build(BuildContext context) => Row(
@@ -10,7 +11,7 @@ class NumbersWidget extends StatelessWidget {
           buildButton(
             context,
             'AGE',
-            '22',
+            age.toString(),
           ),
           buildDivider(),
           buildButton(
