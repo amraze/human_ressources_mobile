@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/profile_api.dart';
+import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -158,9 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(50.0)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    var res =
-                        ProfileApi.login(emailInput.text, passwordInput.text);
-                    Navigator.pushNamed(context, '/home_page');
+                    login(emailInput.text, passwordInput.text);
+
+                    //Navigator.pushNamed(context, '/home_page');
                   }
                 },
                 child: const Text("SIGN IN",
@@ -177,5 +178,29 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+}
+
+void login(String email, String password) async {
+  try {
+    var res = await ProfileApi.postLogin(email, password);
+    int statusCode = res.statusCode;
+    if (statusCode == 422) {
+      print("invalid email format");
+    } else if (statusCode == 404) {
+      print("Please verify your credentials");
+    } else {
+      if (statusCode == 200) {
+        var decodedBody = json.decode(res.body);
+        var token = decodedBody['token'];
+        if (token == null) {
+          print("Please verify your credentials");
+        } else {
+          print("you're logged in !");
+        }
+      }
+    }
+  } catch (exc) {
+    print(exc);
   }
 }

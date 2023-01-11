@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/profile.dart';
 import 'profile_preferences.dart';
@@ -10,15 +11,13 @@ class ProfileApi {
     return await http.get(Uri.parse('https://supcomje.tn/mobile/api/users'));
   }
 
-  static Future login(String email, String password) async {
-    http.post(Uri.parse('https://supcomje.tn/mobile/api/login'), headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    }, body: {
-      'email': email,
-      'password': password
-    }).then((response) {
-      return response;
-    });
+  static Future postLogin(String email, String password) async {
+    return await http.post(Uri.parse('https://supcomje.tn/mobile/api/login'),
+        headers: {
+          'accept': 'application/json',
+        },
+        body: {'email': email, 'password': password},
+        encoding: Encoding.getByName("json"));
   }
 }
 
