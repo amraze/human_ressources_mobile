@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import '../utils/profile_api.dart';
 import 'dart:convert';
 
+const String invalid_credentials_error = "Please verify your credentials !";
+const String invalid_format_error = "Invalid Email format !";
+const String valid_login = "Welcome Back !";
+
+String loginMessage = "bfqbs";
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -159,9 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(50.0)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    login(emailInput.text, passwordInput.text);
-
-                    //Navigator.pushNamed(context, '/home_page');
+                    login(context, emailInput.text, passwordInput.text);
                   }
                 },
                 child: const Text("SIGN IN",
@@ -181,24 +185,30 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-void login(String email, String password) async {
+void login(BuildContext context, String email, String password) async {
   try {
     var res = await ProfileApi.postLogin(email, password);
     int statusCode = res.statusCode;
     if (statusCode == 422) {
-      print("invalid email format");
+      loginMessage = invalid_format_error;
+      // print("invalid email format");
     } else if (statusCode == 404) {
-      print("Please verify your credentials");
+      loginMessage = invalid_credentials_error;
     } else {
       if (statusCode == 200) {
         var decodedBody = json.decode(res.body);
         var token = decodedBody['token'];
         if (token == null) {
-          print("Please verify your credentials");
+          loginMessage = invalid_credentials_error;
         } else {
-          print("you're logged in !");
+          loginMessage = valid_login;
         }
       }
+    }
+    if (loginMessage == valid_login) {
+      Navigator.pushNamed(context, '/home_page'); // add id as an argument
+    } else {
+      print(loginMessage);
     }
   } catch (exc) {
     print(exc);
