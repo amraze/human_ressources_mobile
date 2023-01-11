@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login']);
+Route::get('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
 
 //---------------- User's Routes ----------------//
 Route::post('/users', [App\Http\Controllers\UserController::class, 'store']);
