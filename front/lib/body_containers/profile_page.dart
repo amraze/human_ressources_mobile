@@ -5,7 +5,7 @@ import '/./widgets/button_widget.dart';
 import '/./widgets/numbers_widget.dart';
 import '/./widgets/profile_widget.dart';
 import 'package:http/http.dart' as http;
-import 'package:mobile_project/main_pages/home_page.dart';
+import '/./utils/profile_api.dart';
 
 Widget buildProfilePage(BuildContext context) {
   return Container(

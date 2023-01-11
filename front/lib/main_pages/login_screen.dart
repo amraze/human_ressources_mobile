@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/profile_api.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -10,6 +11,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    TextEditingController emailInput = TextEditingController();
+    TextEditingController passwordInput = TextEditingController();
     return Material(
       child: Container(
         padding: const EdgeInsets.all(60),
@@ -53,70 +57,109 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 44.0,
             ),
-            SizedBox(
-              width: 280,
-              child: TextField(
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      borderSide: const BorderSide(
-                          color: Color(0xff2496AC), width: 4.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      borderSide: const BorderSide(
-                          color: Color(0xff2496AC), width: 4.0)),
-                  contentPadding: const EdgeInsets.all(15),
-                  filled: true,
-                  hintText: "Email",
-                  hintStyle: const TextStyle(
-                      color: Color(0xffD3D3D3),
-                      fontWeight: FontWeight.w300,
-                      fontSize: 20.0),
-                  prefixIcon: const Icon(Icons.mail, color: Color(0xff2496AC)),
+
+            /////
+            ///
+            ////
+            ///
+            ///
+            ///
+            ///
+            ///
+            ///
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //EMAIL BOX INPUT
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                        controller: emailInput,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                              borderSide: const BorderSide(
+                                  color: Color(0xff2496AC), width: 4.0)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                              borderSide: const BorderSide(
+                                  color: Color(0xff2496AC), width: 4.0)),
+                          contentPadding: const EdgeInsets.all(15),
+                          filled: true,
+                          hintText: "Email",
+                          hintStyle: const TextStyle(
+                              color: Color(0xffD3D3D3),
+                              fontWeight: FontWeight.w300,
+                              fontSize: 20.0),
+                          prefixIcon:
+                              const Icon(Icons.mail, color: Color(0xff2496AC)),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.emailAddress,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    //EMPTY BOX
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    //PASSWORD BOX INPUT
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                        obscureText: true,
+                        controller: passwordInput,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                              borderSide: const BorderSide(
+                                  color: Color(0xff2496AC), width: 4.0)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                              borderSide: const BorderSide(
+                                color: Color(0xff2496AC),
+                                width: 4.0,
+                              )),
+                          contentPadding: const EdgeInsets.all(15),
+                          filled: true,
+                          hintText: "Password",
+                          hintStyle: const TextStyle(
+                              color: Color(0xffD3D3D3),
+                              fontWeight: FontWeight.w300,
+                              fontSize: 20.0),
+                          prefixIcon:
+                              const Icon(Icons.lock, color: Color(0xff2496AC)),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your Password';
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.visiblePassword,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 44.0,
+                    ),
+                  ],
                 ),
-                keyboardType: TextInputType.emailAddress,
-                style: const TextStyle(color: Colors.white),
               ),
             ),
-            const SizedBox(
-              height: 26.0,
-            ),
-            SizedBox(
-              width: 280,
-              child: TextFormField(
-                obscureText: true,
-                // validator: (String value) {
-                //   if (value.trim().isEmpty) {
-                //     return 'Password is required';
-                //   }
-                // },
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      borderSide: const BorderSide(
-                          color: Color(0xff2496AC), width: 4.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      borderSide: const BorderSide(
-                        color: Color(0xff2496AC),
-                        width: 4.0,
-                      )),
-                  contentPadding: const EdgeInsets.all(15),
-                  filled: true,
-                  hintText: "Password",
-                  hintStyle: const TextStyle(
-                      color: Color(0xffD3D3D3),
-                      fontWeight: FontWeight.w300,
-                      fontSize: 20.0),
-                  prefixIcon: const Icon(Icons.lock, color: Color(0xff2496AC)),
-                ),
-                keyboardType: TextInputType.visiblePassword,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            const SizedBox(
-              height: 44.0,
-            ),
+
+            //9dim
+
             SizedBox(
               width: 280.0,
               height: 65,
@@ -127,7 +170,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0)),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/home_page');
+                  if (_formKey.currentState!.validate()) {
+                    var res =
+                        ProfileApi.login(emailInput.text, passwordInput.text);
+                    Navigator.pushNamed(context, '/home_page');
+                  }
                 },
                 child: const Text("SIGN IN",
                     style: TextStyle(
