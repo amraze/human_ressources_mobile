@@ -7,6 +7,7 @@ import '/./utils/general_info_preferences.dart';
 import '/./utils/project_preferences.dart';
 import 'package:mobile_project/main_pages/home_page.dart';
 import 'package:mobile_project/utils/profile_api.dart';
+import 'dart:convert';
 
 // username which is a project leader
 String username = "";
@@ -15,9 +16,9 @@ var user = UserPreferences.myUser;
 var projectPreferences = ProjectPreferences.myProject;
 var projectImagePath =
     'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200';
-var projectlist = profile.projects;
+var projectlist = json.decode(profile.projects);
 var finalprojects =
-    projectlist.toList().map((model) => Project.fromJson(model));
+    projectlist.toList().map((model) => Project.fromJson(model)).toList();
 
 class Projects extends StatelessWidget {
   const Projects({Key? key}) : super(key: key);
