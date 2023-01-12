@@ -1,4 +1,4 @@
-import '/./model/general_info.dart';
+import '../model/general_Info.dart';
 
 class GeneralInfoPreferences {
   static var myGeneralInfo = GeneralInfo(projectsList: [

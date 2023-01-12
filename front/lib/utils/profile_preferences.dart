@@ -10,5 +10,6 @@ class ProfilePreferences {
     imagePath: 'id',
     overallrating: 'id',
     isLeader: false,
+    projects: [],
   );
 }

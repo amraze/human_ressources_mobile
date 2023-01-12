@@ -4,6 +4,7 @@ import 'package:mobile_project/body_containers/projects.dart';
 import '/./utils/project_preferences.dart';
 
 var projectPreferences = ProjectPreferences.myProject;
+var membersList = ["Member 1", "Member2", "Member3", "Member4", "Member5"];
 
 class Members extends StatelessWidget {
   const Members({Key? key}) : super(key: key);
@@ -18,9 +19,9 @@ class Members extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
       child: ListView.builder(
-        itemCount: projectPreferences.membersList.length,
+        itemCount: membersList.length,
         itemBuilder: (context, index) {
-          final name = projectPreferences.membersList[index];
+          final name = membersList[index];
 
           return buildMemberCard(context, name, user.imagePath);
         },

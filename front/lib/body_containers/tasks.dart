@@ -31,7 +31,11 @@ class TasksState extends State<Tasks> {
             scrollDirection: Axis.horizontal,
             itemCount: cards.length,
             itemBuilder: (context, index) {
-              if (index < cards.length) return _buildCard(context, index);
+              if (index < cards.length) {
+                return _buildCard(context, index);
+              } else {
+                return _buildCard(context, 0);
+              }
             },
           )),
     );

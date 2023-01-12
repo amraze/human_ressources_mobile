@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mobile_project/model/Profile.dart';
+import 'package:mobile_project/model/profile.dart';
+import 'package:mobile_project/model/project.dart';
 import '/./utils/user_preferences.dart';
 import '/./utils/general_info_preferences.dart';
 import '/./utils/project_preferences.dart';
 import 'package:mobile_project/main_pages/home_page.dart';
+import 'package:mobile_project/utils/profile_api.dart';
 
 // username which is a project leader
 String username = "";
 var generalInfo = GeneralInfoPreferences.myGeneralInfo;
 var user = UserPreferences.myUser;
 var projectPreferences = ProjectPreferences.myProject;
+var projectImagePath =
+    'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200';
+var projectlist = profile.projects;
+var finalprojects =
+    projectlist.toList().map((model) => Project.fromJson(model));
 
 class Projects extends StatelessWidget {
   const Projects({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print(finalprojects);
     return Container(
         margin: const EdgeInsets.all(0),
         padding: const EdgeInsets.fromLTRB(40, 40, 35, 10),
@@ -25,11 +33,10 @@ class Projects extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
         child: ListView.builder(
-          itemCount: generalInfo.projectsList.length,
+          itemCount: finalprojects.length,
           itemBuilder: (context, index) {
-            final name = generalInfo.projectsList[index];
-            return buildProjectCard(
-                context, name, projectPreferences.projectImagePath);
+            final name = finalprojects[index].name;
+            return buildProjectCard(context, name, projectImagePath);
           },
         ));
   }
