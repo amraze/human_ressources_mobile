@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
       // Profile
       buildProfilePage(context),
       // Current Project
-      generalInfo.isRoleLeader ? const Members() : const Tasks(),
+      profile.isLeader ? const Members() : const Tasks(),
       // Projects
       const Projects(),
     ];

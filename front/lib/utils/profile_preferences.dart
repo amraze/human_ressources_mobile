@@ -9,5 +9,6 @@ class ProfilePreferences {
     age: 0,
     imagePath: 'id',
     overallrating: 'id',
+    isLeader: false,
   );
 }
