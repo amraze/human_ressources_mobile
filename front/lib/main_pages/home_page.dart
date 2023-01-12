@@ -12,6 +12,11 @@ import 'dart:convert';
 String username = "";
 var generalInfo = GeneralInfoPreferences.myGeneralInfo;
 
+class HomePageArguments {
+  int id;
+  HomePageArguments(this.id);
+}
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -20,25 +25,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //
   // Getting profiles from api method
-  void getProfilesfromApi() async {
+  void getProfilefromApi(int id) async {
     try {
-      var res = await ProfileApi.getProfiles();
+      var res = await ProfileApi.getProfile(id);
       setState(() {
         var x = json.decode(res.body);
-        List a = x.toList();
-        profile = Profile.fromJson(a[0]);
+
+        profile = Profile.fromJson(x);
       });
     } catch (exc) {
       print(exc);
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getProfilesfromApi();
   }
 
   int _selectedIndex = 0;
@@ -56,6 +54,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as HomePageArguments;
+    setState(() {
+      getProfilefromApi(args.id);
+    });
+
     final List<Widget> _widgetOptions = <Widget>[
       // Profile
       buildProfilePage(context),

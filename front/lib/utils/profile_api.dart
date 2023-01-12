@@ -11,6 +11,11 @@ class ProfileApi {
     return await http.get(Uri.parse('https://supcomje.tn/mobile/api/users'));
   }
 
+  static Future getProfile(int id) async {
+    return await http.get(
+        Uri.parse('https://supcomje.tn/mobile/api/users/'+ id.toString()));
+  }
+
   static Future postLogin(String email, String password) async {
     return await http.post(Uri.parse('https://supcomje.tn/mobile/api/login'),
         headers: {
@@ -20,14 +25,3 @@ class ProfileApi {
         encoding: Encoding.getByName("json"));
   }
 }
-
-// void getUsersfromApi() async {
-//   try {
-//     var res = await ProfileApi.getProfiles();
-//     var x = json.decode(res.body);
-//     List a = x.toList();
-//     profile = Profile.fromJson(a[0]);
-//   } catch (exc) {
-//     print(exc);
-//   }
-// }

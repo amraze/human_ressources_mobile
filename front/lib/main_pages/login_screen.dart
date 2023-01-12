@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_project/main_pages/home_page.dart';
 import '../utils/profile_api.dart';
 import 'dart:convert';
 
@@ -6,7 +7,9 @@ const String invalid_credentials_error = "Please verify your credentials !";
 const String invalid_format_error = "Invalid Email format !";
 const String valid_login = "Welcome Back !";
 
-String loginMessage = "bfqbs";
+String loginMessage = "login message";
+var token = null;
+int id = 1;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -197,16 +200,19 @@ void login(BuildContext context, String email, String password) async {
     } else {
       if (statusCode == 200) {
         var decodedBody = json.decode(res.body);
-        var token = decodedBody['token'];
+        token = decodedBody['token'];
         if (token == null) {
           loginMessage = invalid_credentials_error;
         } else {
+          id = decodedBody["user"]['id'];
+          print(decodedBody["user"]["image"]);
           loginMessage = valid_login;
         }
       }
     }
     if (loginMessage == valid_login) {
-      Navigator.pushNamed(context, '/home_page'); // add id as an argument
+      Navigator.pushNamed(context, '/home_page',
+          arguments: HomePageArguments(id));
     } else {
       print(loginMessage);
     }
