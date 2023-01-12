@@ -13,7 +13,7 @@ import '../main_pages/login_screen.dart';
 // username which is a project leader
 String username = "";
 var generalInfo = GeneralInfoPreferences.myGeneralInfo;
-
+var isOnCurrentPage = false;
 // class HomePageArguments {
 //   int id;
 //   HomePageArguments(this.id);
@@ -77,7 +77,9 @@ class _HomePageState extends State<HomePage> {
           ? _drawerKey.currentState?.openDrawer()
           : setState(() {
               _selectedIndex = index;
+              isOnCurrentPage = index ==1;
             });
+
     }
 
     return Scaffold(

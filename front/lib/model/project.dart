@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class Project {
+  final id;
   final leaderid;
   final name;
   final description;
@@ -14,6 +15,7 @@ class Project {
   static var myProject;
   Project({
     required this.projectImagePath,
+    required this.id,
     required this.leaderid,
     required this.name,
     required this.description,
@@ -26,6 +28,7 @@ class Project {
   Project.fromJson(Map json)
       : leaderid = json["leader_id"],
         name = json["name"],
+        id = json["id"],
         description = json["description"],
         start_date = json["start_date"],
         end_date = json["end_date"],

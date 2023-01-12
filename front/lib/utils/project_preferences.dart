@@ -3,6 +3,7 @@ import '/./model/project.dart';
 class ProjectPreferences {
   static var myProject = Project(
       leaderid: 1,
+      id: 1,
       name: "id",
       description: "blablabla",
       start_date: "10/09/09",

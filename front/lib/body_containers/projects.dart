@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_project/main_pages/home_page.dart';
 import 'package:mobile_project/model/profile.dart';
 import 'package:mobile_project/model/project.dart';
 import 'package:mobile_project/utils/profile_api.dart';
@@ -8,6 +9,7 @@ import 'dart:convert';
 
 var projectList =
     profile.projects.map((model) => Project.fromJson(model)).toList();
+var firstProjectList = [projectList[0]];
 
 class Projects extends StatelessWidget {
   const Projects({Key? key}) : super(key: key);
@@ -22,17 +24,18 @@ class Projects extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
         child: ListView.builder(
-          itemCount: projectList.length,
+          itemCount: isOnCurrentPage ? 1 : projectList.length,
           itemBuilder: (context, index) {
-            final name = projectList[index].name;
-            final imagePath = projectList[index].projectImagePath;
-            return buildProjectCard(context, name, imagePath);
+            var _projectList = isOnCurrentPage ? firstProjectList : projectList;
+            final name = _projectList[index].name;
+            final imagePath = _projectList[index].projectImagePath;
+            return buildProjectCard(context, name, imagePath, index);
           },
         ));
   }
 
-  Widget buildProjectCard(
-          BuildContext context, String projectName, String imageURL) =>
+  Widget buildProjectCard(BuildContext context, String projectName,
+          String imageURL, cardIndex) =>
       Column(
         children: [
           Card(
@@ -45,10 +48,13 @@ class Projects extends StatelessWidget {
                 onTap: () async {
                   try {
                     if (profile.isLeader) {
-                      var selectedProjectId = projectList[0].leaderid;
-                      var res =
-                          await Projectapi.getProjectbyid(selectedProjectId);
+                      var selectedProjectLeaderId = projectList[cardIndex].id;
+                      var res = await Projectapi.getProjectbyid(
+                          selectedProjectLeaderId);
                       var decodedBody = json.decode(res.body);
+                      var name = decodedBody["name"];
+                      print(selectedProjectLeaderId);
+                      print(name);
                       var memberList = decodedBody["users"]
                           .map((model) => Profile.fromJson(model))
                           .toList();
