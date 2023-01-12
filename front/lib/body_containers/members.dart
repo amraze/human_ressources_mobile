@@ -45,8 +45,8 @@ class Members extends StatelessWidget {
                 onTap: () async {
                   var selectedMemberId = project.members[0].id;
                   var res = await ProfileApi.getProfileById(selectedMemberId);
-                  var decodedBody=json.decode(res);
-                  currentMember=Profile.fromJson(decodedBody);
+                  var decodedBody = json.decode(res.body);
+                  currentMember = Profile.fromJson(decodedBody);
                   print(decodedBody);
                   Navigator.pushNamed(context, '/tasks');
                 },

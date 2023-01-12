@@ -9,7 +9,7 @@ class TaskPreferences {
       description: "12/09/09",
       grade: "Junior",
       start_date: "Junior",
-      end_date:"hedi",
-      deadline:"arfuuta"
-  )   
+      end_date: "hedi",
+      deadline: "arfuuta",
+      status: 0);
 }

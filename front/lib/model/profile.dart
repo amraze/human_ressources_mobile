@@ -8,7 +8,7 @@ class Profile {
   final overallrating;
   final isLeader;
   final projects;
-  final tasks;
+  final tasksInfo;
 
   Profile(
       {this.id,
@@ -20,7 +20,7 @@ class Profile {
       this.overallrating,
       this.isLeader,
       this.projects,
-      this.tasks});
+      this.tasksInfo});
   Profile.fromJson(Map json)
       : id = json['id'],
         name = json['first_name'],
@@ -31,7 +31,7 @@ class Profile {
         overallrating = json['overall_performance'],
         isLeader = json['position'] == 1,
         projects = json['projects'],
-        tasks = json['tasks'];
+        tasksInfo = json['tasks'];
 
   Map toJson() {
     return {
@@ -44,7 +44,7 @@ class Profile {
       'overallrating': overallrating,
       'position': isLeader,
       'projects': projects,
-      'tasks': tasks,
+      'tasks': tasksInfo,
     };
   }
 }

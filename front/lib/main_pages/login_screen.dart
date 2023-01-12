@@ -205,7 +205,7 @@ void login(BuildContext context, String email, String password) async {
           loginMessage = invalid_credentials_error;
         } else {
           id = decodedBody["user"]['id'];
-          print(decodedBody["user"]["image"]);
+          //print(decodedBody["user"]["image"]);
           loginMessage = valid_login;
         }
       }

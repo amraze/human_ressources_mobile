@@ -13,8 +13,8 @@ class ProfileApi {
   }
 
   static Future getProfileById(int profileId) async {
-    return await http.get(
-        Uri.parse('https://supcomje.tn/mobile/api/users/' + profileId.toString()));
+    return await http.get(Uri.parse(
+        'https://supcomje.tn/mobile/api/users/' + profileId.toString()));
   }
 
   static Future postLogin(String email, String password) async {

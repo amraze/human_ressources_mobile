@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   // Getting profiles from api method
   void getProfilefromApi(int id) async {
     try {
-      var res = await ProfileApi.getProfile(id);
+      var res = await ProfileApi.getProfileById(id);
       setState(() {
         var x = json.decode(res.body);
 
