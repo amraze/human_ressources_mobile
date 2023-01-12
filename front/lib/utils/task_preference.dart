@@ -2,7 +2,7 @@ import '/./model/task.dart';
 
 class TaskPreferences {
   static var myTask = Task(
-      id: "id",
+      id: 1,
       user_id: "blablabla",
       project_id: "10/09/09",
       name: "11/09/09",

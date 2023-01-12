@@ -2,7 +2,7 @@ import '../model/profile.dart';
 
 class ProfilePreferences {
   static var myProfile = Profile(
-      id: 'id',
+      id: 1,
       name: 'id',
       email: 'id',
       about: 'id',

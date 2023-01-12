@@ -14,6 +14,6 @@ void main() {
     '/login_screen': (context) => const LoginScreen(),
     '/performance': (context) => const PerPage(),
     '/tasks': (context) => const Tasks(),
-    'members': (context) => const Members()
+    '/members': (context) => const Members()
   }));
 }

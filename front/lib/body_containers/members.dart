@@ -43,12 +43,16 @@ class Members extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () async {
-                  var selectedMemberId = project.members[0].id;
-                  var res = await ProfileApi.getProfileById(selectedMemberId);
-                  var decodedBody = json.decode(res.body);
-                  currentMember = Profile.fromJson(decodedBody);
-                  print(decodedBody);
-                  Navigator.pushNamed(context, '/tasks');
+                  try {
+                    var selectedMemberId = project.members[0].id;
+                    var res = await ProfileApi.getProfileById(selectedMemberId);
+                    var decodedBody = json.decode(res.body);
+                    selectedMember = Profile.fromJson(decodedBody);
+                    print(decodedBody);
+                    Navigator.pushNamed(context, '/tasks');
+                  } catch (exc) {
+                    print(exc);
+                  }
                 },
                 child: Column(
                   children: [

@@ -43,16 +43,22 @@ class Projects extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () async {
-                  if (profile.isLeader) {
-                    var selectedProjectId = projectList[0].leaderid;
-                    var res =
-                        await Projectapi.getProjectbyid(selectedProjectId);
-                    var decodedBody = json.decode(res.body);
-                    var memberList = decodedBody["users"]
-                        .map((model) => Profile.fromJson(model))
-                        .toList();
-                    project.members = memberList;
-                    Navigator.pushNamed(context, 'members');
+                  try {
+                    if (profile.isLeader) {
+                      var selectedProjectId = projectList[0].leaderid;
+                      var res =
+                          await Projectapi.getProjectbyid(selectedProjectId);
+                      var decodedBody = json.decode(res.body);
+                      var memberList = decodedBody["users"]
+                          .map((model) => Profile.fromJson(model))
+                          .toList();
+                      project.members = memberList;
+                      Navigator.pushNamed(context, '/members');
+                    } else {
+                      Navigator.pushNamed(context, '/tasks');
+                    }
+                  } catch (exc) {
+                    print(exc);
                   }
                 },
                 child: Column(

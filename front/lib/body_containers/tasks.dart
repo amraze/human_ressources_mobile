@@ -6,8 +6,8 @@ import 'task_form.dart';
 import '../utils/profile_api.dart';
 import '../utils/project_api.dart';
 
-// var status = ;
-var x = currentMember.tasksInfo;
+var viewedMember = profile.isLeader ? selectedMember : profile;
+var x = viewedMember.tasksInfo;
 var taskList = x.map((model) => Task.fromJson(model)).toList();
 var todoTasks = taskList.where((x) => (x.status == 0)).toList();
 var inProgressTasks = taskList.where((x) => (x.status == 1)).toList();
@@ -35,7 +35,6 @@ class TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
-    print(currentMember.id);
     return Scaffold(
       body: Container(
           decoration: const BoxDecoration(
@@ -311,7 +310,7 @@ class TasksState extends State<Tasks> {
     String taskDeadline = deadlineInput.text;
     String taskDescription = descriptionInput.text;
     Task cardInfoList = Task(
-        user_id: currentMember.id,
+        user_id: viewedMember.id,
         project_id: project.leaderid,
         name: taskName,
         description: taskDescription,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../performance_utils/performance.dart';
 import '/body_containers/members.dart';
 import '/./utils/general_info_preferences.dart';
 import '/body_containers/projects.dart';
@@ -7,15 +8,16 @@ import '../body_containers/tasks.dart';
 import '../utils/profile_api.dart';
 import '../model/profile.dart';
 import 'dart:convert';
+import '../main_pages/login_screen.dart';
 
 // username which is a project leader
 String username = "";
 var generalInfo = GeneralInfoPreferences.myGeneralInfo;
 
-class HomePageArguments {
-  int id;
-  HomePageArguments(this.id);
-}
+// class HomePageArguments {
+//   int id;
+//   HomePageArguments(this.id);
+// }
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,6 +41,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    getProfilefromApi(firstId);
+  }
+
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   static const TextStyle optionStyle =
@@ -54,18 +62,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as HomePageArguments;
-    setState(() {
-      getProfilefromApi(args.id);
-    });
-
     final List<Widget> _widgetOptions = <Widget>[
       // Profile
       buildProfilePage(context),
       // Current Project
       //************************************************************ */
-      profile.isLeader ? const Members() : const Tasks(),
+      profile.isLeader ? Projects() : const Tasks(),
       // Projects
       const Projects(),
     ];

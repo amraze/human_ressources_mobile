@@ -9,7 +9,7 @@ const String valid_login = "Welcome Back !";
 
 String loginMessage = "login message";
 var token = null;
-int id = 1;
+int firstId = 1;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -204,15 +204,17 @@ void login(BuildContext context, String email, String password) async {
         if (token == null) {
           loginMessage = invalid_credentials_error;
         } else {
-          id = decodedBody["user"]['id'];
+          firstId = decodedBody["user"]['id'];
           //print(decodedBody["user"]["image"]);
           loginMessage = valid_login;
         }
       }
     }
     if (loginMessage == valid_login) {
-      Navigator.pushNamed(context, '/home_page',
-          arguments: HomePageArguments(id));
+      Navigator.pushNamed(
+        context,
+        '/home_page',
+      );
     } else {
       print(loginMessage);
     }
