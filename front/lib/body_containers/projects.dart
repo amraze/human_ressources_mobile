@@ -2,29 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_project/model/profile.dart';
 import 'package:mobile_project/model/project.dart';
-import '/./utils/user_preferences.dart';
-import '/./utils/general_info_preferences.dart';
-import '/./utils/project_preferences.dart';
-import 'package:mobile_project/main_pages/home_page.dart';
 import 'package:mobile_project/utils/profile_api.dart';
+import 'package:mobile_project/utils/project_api.dart';
 import 'dart:convert';
 
-// username which is a project leader
-String username = "";
-var generalInfo = GeneralInfoPreferences.myGeneralInfo;
-var user = UserPreferences.myUser;
-var projectPreferences = ProjectPreferences.myProject;
-var projectImagePath =
-    'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200';
-var projectlist = json.decode(profile.projects);
-var finalprojects =
-    projectlist.toList().map((model) => Project.fromJson(model)).toList();
+var projectList =
+    profile.projects.map((model) => Project.fromJson(model)).toList();
 
 class Projects extends StatelessWidget {
   const Projects({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print(finalprojects);
     return Container(
         margin: const EdgeInsets.all(0),
         padding: const EdgeInsets.fromLTRB(40, 40, 35, 10),
@@ -34,10 +22,11 @@ class Projects extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
         child: ListView.builder(
-          itemCount: finalprojects.length,
+          itemCount: projectList.length,
           itemBuilder: (context, index) {
-            final name = finalprojects[index].name;
-            return buildProjectCard(context, name, projectImagePath);
+            final name = projectList[index].name;
+            final imagePath = projectList[index].projectImagePath;
+            return buildProjectCard(context, name, imagePath);
           },
         ));
   }
@@ -53,8 +42,18 @@ class Projects extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
               ),
               child: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, 'members');
+                onTap: () async {
+                  if (profile.isLeader) {
+                    var selectedProjectId = projectList[0].leaderid;
+                    var res =
+                        await Projectapi.getProjectbyid(selectedProjectId);
+                    var decodedBody = json.decode(res.body);
+                    var memberList = decodedBody["users"]
+                        .map((model) => Profile.fromJson(model))
+                        .toList();
+                    project.members = memberList;
+                    Navigator.pushNamed(context, 'members');
+                  }
                 },
                 child: Column(
                   children: [

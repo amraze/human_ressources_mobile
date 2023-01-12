@@ -9,5 +9,7 @@ class ProjectPreferences {
       end_date: "11/09/09",
       deadline: "12/09/09",
       category: "Junior",
-      members: ["member1", "member2"]);
+      members: [],
+      projectImagePath:
+          'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200');
 }

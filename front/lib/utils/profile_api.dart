@@ -5,15 +5,16 @@ import '../model/profile.dart';
 import 'profile_preferences.dart';
 
 Profile profile = ProfilePreferences.myProfile;
+Profile currentMember = ProfilePreferences.myProfile;
 
 class ProfileApi {
   static Future getProfiles() async {
     return await http.get(Uri.parse('https://supcomje.tn/mobile/api/users'));
   }
 
-  static Future getProfile(int id) async {
+  static Future getProfileById(int profileId) async {
     return await http.get(
-        Uri.parse('https://supcomje.tn/mobile/api/users/' + id.toString()));
+        Uri.parse('https://supcomje.tn/mobile/api/users/' + profileId.toString()));
   }
 
   static Future postLogin(String email, String password) async {

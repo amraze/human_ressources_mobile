@@ -158,12 +158,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              width: 280.0,
-              height: 65,
+              width: 180.0,
+              height: 55,
               child: RawMaterialButton(
                 fillColor: Colors.white,
                 elevation: 0.0,
-                padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+                padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 20.0),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0)),
                 onPressed: () {

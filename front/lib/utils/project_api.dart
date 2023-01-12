@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/project.dart';
 import 'project_preferences.dart';
 
-Project profile = ProjectPreferences.myProject;
+Project project = ProjectPreferences.myProject;
 
 class Projectapi {
   static Future getProjects() async {
@@ -15,4 +14,6 @@ class Projectapi {
     return await http.get(Uri.parse('https://supcomje.tn/mobile/api/projects/' +
         id.toString())); // project ID
   }
+
+
 }

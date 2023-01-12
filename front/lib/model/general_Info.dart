@@ -4,6 +4,5 @@ class GeneralInfo {
   static var myGeneralInfo;
   GeneralInfo({
     required this.projectsList,
-    required bool isRoleLeader,
   });
 }

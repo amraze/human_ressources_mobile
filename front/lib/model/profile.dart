@@ -8,18 +8,19 @@ class Profile {
   final overallrating;
   final isLeader;
   final projects;
+  final tasks;
 
-  Profile({
-    this.id,
-    this.email,
-    this.name,
-    this.imagePath,
-    this.about,
-    this.age,
-    this.overallrating,
-    this.isLeader,
-    this.projects,
-  });
+  Profile(
+      {this.id,
+      this.email,
+      this.name,
+      this.imagePath,
+      this.about,
+      this.age,
+      this.overallrating,
+      this.isLeader,
+      this.projects,
+      this.tasks});
   Profile.fromJson(Map json)
       : id = json['id'],
         name = json['first_name'],
@@ -29,19 +30,21 @@ class Profile {
         imagePath = json['image'],
         overallrating = json['overall_performance'],
         isLeader = json['position'] == 1,
-        projects = json['projects'];
+        projects = json['projects'],
+        tasks = json['tasks'];
 
   Map toJson() {
     return {
       'id': id,
       'name': name,
-      'img': imagePath,
+      'image': imagePath,
       'email': email,
       'age': age,
       'bio': about,
       'overallrating': overallrating,
       'position': isLeader,
       'projects': projects,
+      'tasks': tasks,
     };
   }
 }

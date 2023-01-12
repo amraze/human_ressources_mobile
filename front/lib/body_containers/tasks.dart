@@ -17,6 +17,12 @@ class TasksState extends State<Tasks> {
   static const TextStyle taskInfoStyle =
       TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white);
   List<String> cards = ["ToDo", "In Progress", "To Review", "Completed"];
+  List<List<int>> colors = [
+    [255, 254, 115, 63],
+    [255, 254, 197, 63],
+    [255, 17, 207, 231],
+    [255, 147, 254, 63]
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +38,9 @@ class TasksState extends State<Tasks> {
             itemCount: cards.length,
             itemBuilder: (context, index) {
               if (index < cards.length) {
-                return _buildCard(context, index);
+                return _buildCard(context, index, colors[index]);
               } else {
-                return _buildCard(context, 0);
+                return _buildCard(context, 0, colors[0]);
               }
             },
           )),
@@ -92,7 +98,7 @@ class TasksState extends State<Tasks> {
     );
   }
 
-  Widget _buildCard(BuildContext context, int index) {
+  Widget _buildCard(BuildContext context, int index, List<int> color) {
     return Container(
       child: Stack(
         children: <Widget>[
@@ -107,7 +113,7 @@ class TasksState extends State<Tasks> {
                 //       spreadRadius: 1)
               ],
               borderRadius: BorderRadius.circular(10.0),
-              color: Color.fromARGB(128, 17, 206, 231),
+              color: Color.fromARGB(color[0], color[1], color[2], color[3]),
             ),
             margin: const EdgeInsets.all(16.0),
             height: MediaQuery.of(context).size.height * 0.9,

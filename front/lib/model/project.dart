@@ -8,10 +8,12 @@ class Project {
   final end_date;
   final deadline;
   final category;
-  final members;
+  var members;
+  final projectImagePath;
   // ignore: prefer_typing_uninitialized_variables
   static var myProject;
   Project({
+    required this.projectImagePath,
     required this.leaderid,
     required this.name,
     required this.description,
@@ -29,7 +31,9 @@ class Project {
         end_date = json["end_date"],
         deadline = json["deadline"],
         category = json["category"],
-        members = json["members"];
+        members = json["users"],
+        projectImagePath =
+            'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200';
 
   Map toJson() {
     return {
@@ -41,6 +45,7 @@ class Project {
       'deadline': deadline,
       'category': category,
       'members': members,
+      'image': projectImagePath
     };
   }
 }
