@@ -6,15 +6,8 @@ import 'task_form.dart';
 import '../utils/profile_api.dart';
 import '../utils/project_api.dart';
 
-var viewedMember = profile.isLeader ? selectedMember : profile;
-var x = viewedMember.tasksInfo;
-var taskList = x.map((model) => Task.fromJson(model)).toList();
-var todoTasks = taskList.where((x) => (x.status == 0)).toList();
-var inProgressTasks = taskList.where((x) => (x.status == 1)).toList();
-var toReviewTasks = taskList.where((x) => (x.status == 2)).toList();
-var completedTasks = taskList.where((x) => (x.status == 3)).toList();
-
-var _tasksInfo = [todoTasks, inProgressTasks, toReviewTasks, completedTasks];
+var _tasksInfo;
+var viewedMember;
 
 class Tasks extends StatefulWidget {
   const Tasks({Key? key}) : super(key: key);
@@ -35,6 +28,16 @@ class TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      viewedMember = loggedProfile.isLeader ? selectedMember : loggedProfile;
+      var x = viewedMember.tasksInfo;
+      var taskList = x.map((model) => Task.fromJson(model)).toList();
+      var todoTasks = taskList.where((x) => (x.status == 0)).toList();
+      var inProgressTasks = taskList.where((x) => (x.status == 1)).toList();
+      var toReviewTasks = taskList.where((x) => (x.status == 2)).toList();
+      var completedTasks = taskList.where((x) => (x.status == 3)).toList();
+      _tasksInfo = [todoTasks, inProgressTasks, toReviewTasks, completedTasks];
+    });
     return Scaffold(
       body: Container(
           decoration: const BoxDecoration(
@@ -114,13 +117,7 @@ class TasksState extends State<Tasks> {
           Container(
             width: 300.0,
             decoration: BoxDecoration(
-              boxShadow: const [
-                //   BoxShadow(
-                //       blurRadius: 5,
-                //       offset: Offset(0, 0),
-                //       color: Color.fromARGB(122, 150, 119, 18),
-                //       spreadRadius: 1)
-              ],
+              boxShadow: const [],
               borderRadius: BorderRadius.circular(10.0),
               color: Color.fromARGB(color[0], color[1], color[2], color[3]),
             ),
@@ -311,7 +308,7 @@ class TasksState extends State<Tasks> {
     String taskDescription = descriptionInput.text;
     Task cardInfoList = Task(
         user_id: viewedMember.id,
-        project_id: project.leaderid,
+        project_id: viewedProject.leaderid,
         name: taskName,
         description: taskDescription,
         grade: 50,

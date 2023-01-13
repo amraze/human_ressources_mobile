@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../model/profile.dart';
 import 'profile_preferences.dart';
 
-Profile profile = ProfilePreferences.myProfile;
+Profile loggedProfile = ProfilePreferences.myProfile;
 Profile selectedMember = ProfilePreferences.myProfile;
 
 class ProfileApi {

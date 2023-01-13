@@ -8,7 +8,7 @@ import 'package:mobile_project/utils/project_api.dart';
 import 'dart:convert';
 
 var projectList =
-    profile.projects.map((model) => Project.fromJson(model)).toList();
+    loggedProfile.projects.map((model) => Project.fromJson(model)).toList();
 var firstProjectList = [projectList[0]];
 
 class Projects extends StatelessWidget {
@@ -47,18 +47,16 @@ class Projects extends StatelessWidget {
               child: InkWell(
                 onTap: () async {
                   try {
-                    if (profile.isLeader) {
+                    if (loggedProfile.isLeader) {
                       var selectedProjectLeaderId = projectList[cardIndex].id;
                       var res = await Projectapi.getProjectbyid(
                           selectedProjectLeaderId);
                       var decodedBody = json.decode(res.body);
                       var name = decodedBody["name"];
-                      print(selectedProjectLeaderId);
-                      print(name);
                       var memberList = decodedBody["users"]
                           .map((model) => Profile.fromJson(model))
                           .toList();
-                      project.members = memberList;
+                      viewedProject.members = memberList;
                       Navigator.pushNamed(context, '/members');
                     } else {
                       Navigator.pushNamed(context, '/tasks');

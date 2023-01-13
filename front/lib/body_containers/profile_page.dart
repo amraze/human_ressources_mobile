@@ -27,7 +27,7 @@ Widget buildProfilePage(BuildContext context) {
           height: 30,
         ),
         ProfileWidget(
-          imagePath: profile.imagePath,
+          imagePath: loggedProfile.imagePath,
           onClicked: () async {},
         ),
         const SizedBox(height: 24),
@@ -35,7 +35,7 @@ Widget buildProfilePage(BuildContext context) {
         const SizedBox(height: 24),
         Center(child: buildUpgradeButton(context)),
         const SizedBox(height: 24),
-        NumbersWidget(age: profile.age),
+        NumbersWidget(age: loggedProfile.age),
         const SizedBox(height: 48),
         buildAbout(),
       ],
@@ -46,7 +46,7 @@ Widget buildProfilePage(BuildContext context) {
 Widget buildName() => Column(
       children: [
         Text(
-          profile.name,
+          loggedProfile.name,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
@@ -55,7 +55,7 @@ Widget buildName() => Column(
         ),
         const SizedBox(height: 4),
         Text(
-          profile.email,
+          loggedProfile.email,
           style: const TextStyle(color: Color.fromARGB(255, 185, 185, 185)),
         )
       ],
@@ -83,7 +83,7 @@ Widget buildAbout() => Container(
           ),
           const SizedBox(height: 16),
           Text(
-            profile.about,
+            loggedProfile.about,
             style: const TextStyle(
               fontSize: 16,
               height: 1.4,

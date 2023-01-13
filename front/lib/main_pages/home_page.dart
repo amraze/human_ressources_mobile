@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import '../performance_utils/performance.dart';
-import '/body_containers/members.dart';
-import '/./utils/general_info_preferences.dart';
+
 import '/body_containers/projects.dart';
 import '../body_containers/profile_page.dart';
 import '../body_containers/tasks.dart';
@@ -10,14 +8,7 @@ import '../model/profile.dart';
 import 'dart:convert';
 import '../main_pages/login_screen.dart';
 
-// username which is a project leader
-String username = "";
-var generalInfo = GeneralInfoPreferences.myGeneralInfo;
 var isOnCurrentPage = false;
-// class HomePageArguments {
-//   int id;
-//   HomePageArguments(this.id);
-// }
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         var x = json.decode(res.body);
 
-        profile = Profile.fromJson(x);
+        loggedProfile = Profile.fromJson(x);
       });
     } catch (exc) {
       print(exc);
@@ -67,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       buildProfilePage(context),
       // Current Project
       //************************************************************ */
-      profile.isLeader ? Projects() : const Tasks(),
+      loggedProfile.isLeader ? Projects() : const Tasks(),
       // Projects
       const Projects(),
     ];
@@ -77,9 +68,8 @@ class _HomePageState extends State<HomePage> {
           ? _drawerKey.currentState?.openDrawer()
           : setState(() {
               _selectedIndex = index;
-              isOnCurrentPage = index ==1;
+              isOnCurrentPage = index == 1;
             });
-
     }
 
     return Scaffold(

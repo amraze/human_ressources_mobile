@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../model/profile.dart';
 import '../utils/profile_api.dart';
 import '../utils/project_api.dart';
-import '../utils/task_api.dart';
 
 class Members extends StatelessWidget {
   const Members({Key? key}) : super(key: key);
@@ -20,19 +19,19 @@ class Members extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
       child: ListView.builder(
-        itemCount: project.members.length,
+        itemCount: viewedProject.members.length,
         itemBuilder: (context, index) {
-          final name = project.members[index].name;
-          final memberimagePath = project.members[index].imagePath;
+          final name = viewedProject.members[index].name;
+          final memberimagePath = viewedProject.members[index].imagePath;
 
-          return buildMemberCard(context, name, memberimagePath);
+          return buildMemberCard(context, name, memberimagePath, index);
         },
       ),
     );
   }
 
-  Widget buildMemberCard(
-          BuildContext context, String memberName, String imageURL) =>
+  Widget buildMemberCard(BuildContext context, String memberName,
+          String imageURL, int cardIndex) =>
       Column(
         children: [
           Card(
@@ -44,11 +43,10 @@ class Members extends StatelessWidget {
               child: InkWell(
                 onTap: () async {
                   try {
-                    var selectedMemberId = project.members[0].id;
+                    var selectedMemberId = viewedProject.members[cardIndex].id;
                     var res = await ProfileApi.getProfileById(selectedMemberId);
                     var decodedBody = json.decode(res.body);
                     selectedMember = Profile.fromJson(decodedBody);
-                    print(decodedBody);
                     Navigator.pushNamed(context, '/tasks');
                   } catch (exc) {
                     print(exc);
