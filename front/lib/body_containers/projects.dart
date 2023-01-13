@@ -4,7 +4,7 @@ import 'package:mobile_project/main_pages/home_page.dart';
 import 'package:mobile_project/model/profile.dart';
 import 'package:mobile_project/model/project.dart';
 import 'dart:convert';
-
+import '../body_containers/tasks.dart';
 import '../api_utils/profile_api.dart';
 import '../api_utils/project_api.dart';
 
@@ -60,6 +60,7 @@ class Projects extends StatelessWidget {
                       viewedProject.members = memberList;
                       Navigator.pushNamed(context, '/members');
                     } else {
+                      TasksState.updateViewedMember();
                       Navigator.pushNamed(context, '/tasks');
                     }
                   } catch (exc) {

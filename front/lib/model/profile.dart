@@ -1,19 +1,21 @@
 class Profile {
   final id;
   final imagePath;
-  final name;
   final email;
   final about;
   final age;
   final overallrating;
   final isLeader;
   final projects;
-  final tasksInfo;
+  var tasksInfo;
+  final firstName;
+  final secondName;
 
   Profile(
       {this.id,
       this.email,
-      this.name,
+      this.firstName,
+      this.secondName,
       this.imagePath,
       this.about,
       this.age,
@@ -23,12 +25,13 @@ class Profile {
       this.tasksInfo});
   Profile.fromJson(Map json)
       : id = json['id'],
-        name = json['first_name'],
+        firstName = json['first_name'],
+        secondName = json['last_name'],
         email = json['email'],
-        
         about = json['bio'],
         age = json['age'],
-        imagePath = 'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200',
+        imagePath =
+            'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200',
         overallrating = json['overall_performance'],
         isLeader = json['position'] == 1,
         projects = json['projects'],
@@ -37,13 +40,14 @@ class Profile {
   Map toJson() {
     return {
       'id': id,
-      'name': name,
+      'first_name': firstName,
+      'last_name': secondName,
       'image': imagePath,
       'email': email,
       'age': age,
       'bio': about,
       'overallrating': overallrating,
-      'position': isLeader,
+      'position': isLeader ? 1 : 0,
       'projects': projects,
       'tasks': tasksInfo,
     };

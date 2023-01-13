@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
+import 'package:mobile_project/model/profile.dart';
 import '../api_utils/profile_api.dart';
 import '../api_utils/project_api.dart';
 import '../model/Task.dart';
@@ -16,6 +17,17 @@ class Tasks extends StatefulWidget {
 }
 
 class TasksState extends State<Tasks> {
+  static void updateViewedMember() {
+    viewedMember = loggedProfile.isLeader ? selectedMember : loggedProfile;
+    var x = viewedMember.tasksInfo;
+    var taskList = x.map((model) => Task.fromJson(model)).toList();
+    var todoTasks = taskList.where((x) => (x.status == 0)).toList();
+    var inProgressTasks = taskList.where((x) => (x.status == 1)).toList();
+    var toReviewTasks = taskList.where((x) => (x.status == 2)).toList();
+    var completedTasks = taskList.where((x) => (x.status == 3)).toList();
+    _tasksInfo = [todoTasks, inProgressTasks, toReviewTasks, completedTasks];
+  }
+
   static const TextStyle taskInfoStyle =
       TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white);
   List<String> cards = ["ToDo", "In Progress", "To Review", "Completed"];
@@ -28,17 +40,6 @@ class TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      print("gz");
-      viewedMember = loggedProfile.isLeader ? selectedMember : loggedProfile;
-      var x = viewedMember.tasksInfo;
-      var taskList = x.map((model) => Task.fromJson(model)).toList();
-      var todoTasks = taskList.where((x) => (x.status == 0)).toList();
-      var inProgressTasks = taskList.where((x) => (x.status == 1)).toList();
-      var toReviewTasks = taskList.where((x) => (x.status == 2)).toList();
-      var completedTasks = taskList.where((x) => (x.status == 3)).toList();
-      _tasksInfo = [todoTasks, inProgressTasks, toReviewTasks, completedTasks];
-    });
     return Scaffold(
       body: Container(
           decoration: const BoxDecoration(
@@ -157,7 +158,9 @@ class TasksState extends State<Tasks> {
                     ),
                   ),
                 ),
-                _buildAddCardTaskWidget(context, index),
+                loggedProfile.isLeader
+                    ? _buildAddCardTaskWidget(context, index)
+                    : SizedBox(height: 1),
               ],
             ),
           ),
@@ -173,7 +176,11 @@ class TasksState extends State<Tasks> {
                 }
                 _tasksInfo[data['from']].remove(data['cardInfoList']);
                 _tasksInfo[index].add(data['cardInfoList']);
+                // viewedMember.tasksInfo.add(data['cardInfoList'].toJson());
+                // viewedMember.tasksInfo.remove(data['cardInfoList'].toJson());
 
+                // print(viewedMember.tasksInfo.length);
+                setState(() {});
                 ////patch///////
                 /////////
                 ///
@@ -181,8 +188,6 @@ class TasksState extends State<Tasks> {
                 ///
                 ///
                 ///
-
-                setState(() {});
               },
               builder: (context, accept, reject) {
                 //print("--- > $accept");

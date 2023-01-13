@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../api_utils/profile_api.dart';
 import '../api_utils/project_api.dart';
 import '../model/profile.dart';
+import '../body_containers/tasks.dart';
 
 class Members extends StatelessWidget {
   const Members({Key? key}) : super(key: key);
@@ -21,7 +22,8 @@ class Members extends StatelessWidget {
       child: ListView.builder(
         itemCount: viewedProject.members.length,
         itemBuilder: (context, index) {
-          final name = viewedProject.members[index].name;
+          final name =
+              '${viewedProject.members[index].firstName} ${viewedProject.members[index].secondName}';
           final memberimagePath = viewedProject.members[index].imagePath;
 
           return buildMemberCard(context, name, memberimagePath, index);
@@ -47,6 +49,7 @@ class Members extends StatelessWidget {
                     var res = await ProfileApi.getProfileById(selectedMemberId);
                     var decodedBody = json.decode(res.body);
                     selectedMember = Profile.fromJson(decodedBody);
+                    TasksState.updateViewedMember();
                     Navigator.pushNamed(context, '/tasks');
                   } catch (exc) {
                     print(exc);

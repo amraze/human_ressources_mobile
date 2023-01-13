@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
   static const circleAvatar = CircleAvatar(
     radius: 80,
-    backgroundImage: AssetImage('assets/images/nasski.png'),
+    backgroundImage: AssetImage('assets/images/naski.png'),
   );
 
   // User name

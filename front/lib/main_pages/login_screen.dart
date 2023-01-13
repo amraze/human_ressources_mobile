@@ -229,7 +229,6 @@ class _LoginScreenState extends State<LoginScreen> {
           '/home_page',
         );
       } else {
-        print(loginMessage);
         setState(() {});
       }
     } catch (exc) {

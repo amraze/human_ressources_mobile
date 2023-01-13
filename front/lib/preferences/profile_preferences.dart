@@ -3,12 +3,13 @@ import '../model/profile.dart';
 class ProfilePreferences {
   static var myProfile = Profile(
       id: 1,
-      name: 'id',
-      email: 'id',
-      about: 'id',
-      age: 0,
+      firstName: 'Mohamed',
+      secondName: 'Naski',
+      email: 'mohamed.naski@supcom.tn',
+      about: 'Hi ! ',
+      age: 22,
       imagePath: 'id',
-      overallrating: 'id',
+      overallrating: '100',
       isLeader: false,
       projects: [],
       tasksInfo: [

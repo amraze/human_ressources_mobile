@@ -5,8 +5,8 @@ import '/./widgets/numbers_widget.dart';
 import '/./widgets/profile_widget.dart';
 
 const circleAvatar = CircleAvatar(
-  radius: 80,
-  backgroundImage: AssetImage('assets/images/nasski.png'),
+  radius: 70,
+  backgroundImage: AssetImage('assets/images/naski.png'),
 );
 
 Widget buildProfilePage(BuildContext context) {
@@ -49,7 +49,7 @@ Widget buildProfilePage(BuildContext context) {
 Widget buildName() => Column(
       children: [
         Text(
-          loggedProfile.name,
+          '${loggedProfile.firstName} ${loggedProfile.secondName}',
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
