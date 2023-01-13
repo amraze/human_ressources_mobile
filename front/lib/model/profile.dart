@@ -25,9 +25,10 @@ class Profile {
       : id = json['id'],
         name = json['first_name'],
         email = json['email'],
+        
         about = json['bio'],
         age = json['age'],
-        imagePath = json['image'],
+        imagePath = 'https://imageio.forbes.com/specials-images/dam/imageserve/1129869424/0x0.jpg?format=jpg&width=1200',
         overallrating = json['overall_performance'],
         isLeader = json['position'] == 1,
         projects = json['projects'],

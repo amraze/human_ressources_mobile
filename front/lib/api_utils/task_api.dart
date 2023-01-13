@@ -1,5 +1,5 @@
 import '../model/task.dart';
-import '../utils/task_preference.dart';
+import '../preferences/task_preference.dart';
 
 Task task = TaskPreferences.myTask;
 

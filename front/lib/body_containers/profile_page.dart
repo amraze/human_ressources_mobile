@@ -4,6 +4,11 @@ import '/./widgets/button_widget.dart';
 import '/./widgets/numbers_widget.dart';
 import '/./widgets/profile_widget.dart';
 
+const circleAvatar = CircleAvatar(
+  radius: 80,
+  backgroundImage: AssetImage('assets/images/nasski.png'),
+);
+
 Widget buildProfilePage(BuildContext context) {
   return Container(
     decoration: const BoxDecoration(
@@ -23,10 +28,11 @@ Widget buildProfilePage(BuildContext context) {
         const SizedBox(
           height: 30,
         ),
-        ProfileWidget(
-          imagePath: loggedProfile.imagePath,
-          onClicked: () async {},
-        ),
+        circleAvatar,
+        // ProfileWidget(
+        //   imagePath: loggedProfile.imagePath,
+        //   onClicked: () async {},
+        // ),
         const SizedBox(height: 24),
         buildName(),
         const SizedBox(height: 24),

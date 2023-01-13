@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import '../model/project.dart';
-import '../utils/project_preferences.dart';
+import '../preferences/project_preferences.dart';
 
 Project viewedProject = ProjectPreferences.myProject;
 

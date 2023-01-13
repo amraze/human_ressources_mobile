@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '/./performance_utils/PerCardMicro.dart';
 import '/./performance_utils/TapBar.dart';
 import '/./performance_utils/Rating.dart';
-import '/./utils/user_preferences.dart';
+import '../preferences/user_preferences.dart';
 
 var user = UserPreferences.myUser;
 
