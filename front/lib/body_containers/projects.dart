@@ -3,9 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_project/main_pages/home_page.dart';
 import 'package:mobile_project/model/profile.dart';
 import 'package:mobile_project/model/project.dart';
-import 'package:mobile_project/utils/profile_api.dart';
-import 'package:mobile_project/utils/project_api.dart';
 import 'dart:convert';
+
+import '../api_utils/profile_api.dart';
+import '../api_utils/project_api.dart';
 
 var projectList =
     loggedProfile.projects.map((model) => Project.fromJson(model)).toList();

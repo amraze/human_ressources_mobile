@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../api_utils/profile_api.dart';
 import '/body_containers/projects.dart';
 import '../body_containers/profile_page.dart';
 import '../body_containers/tasks.dart';
-import '../utils/profile_api.dart';
 import '../model/profile.dart';
 import 'dart:convert';
 import '../main_pages/login_screen.dart';

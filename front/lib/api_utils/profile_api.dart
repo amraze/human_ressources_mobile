@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/profile.dart';
-import 'profile_preferences.dart';
+import '../utils/profile_preferences.dart';
 
 Profile loggedProfile = ProfilePreferences.myProfile;
 Profile selectedMember = ProfilePreferences.myProfile;

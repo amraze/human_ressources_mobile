@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../api_utils/profile_api.dart';
+import '../api_utils/project_api.dart';
 import '../model/profile.dart';
-import '../utils/profile_api.dart';
-import '../utils/project_api.dart';
 
 class Members extends StatelessWidget {
   const Members({Key? key}) : super(key: key);

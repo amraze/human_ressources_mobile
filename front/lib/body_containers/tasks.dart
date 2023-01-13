@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
+import '../api_utils/profile_api.dart';
+import '../api_utils/project_api.dart';
 import '../model/Task.dart';
 import 'task_form.dart';
-import '../utils/profile_api.dart';
-import '../utils/project_api.dart';
 
 var _tasksInfo;
 var viewedMember;

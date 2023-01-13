@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_project/main_pages/home_page.dart';
-import '../utils/profile_api.dart';
+import '../api_utils/profile_api.dart';
 import 'dart:convert';
 
 const String invalid_credentials_error = "Please verify your credentials !";

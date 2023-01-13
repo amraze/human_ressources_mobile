@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import '../model/users.dart';
-import '/./utils/user_preferences.dart';
+import '../api_utils/profile_api.dart';
 import '/./widgets/button_widget.dart';
 import '/./widgets/numbers_widget.dart';
 import '/./widgets/profile_widget.dart';
-import 'package:http/http.dart' as http;
-import '/./utils/profile_api.dart';
 
 Widget buildProfilePage(BuildContext context) {
   return Container(

@@ -12,7 +12,7 @@ void main() {
   runApp(MaterialApp(initialRoute: '/login_screen', routes: {
     '/home_page': (context) => const HomePage(),
     '/login_screen': (context) => const LoginScreen(),
-    '/performance': (context) => const PerPage(),
+    '/performance': (context) => const Performance(),
     '/tasks': (context) => const Tasks(),
     '/members': (context) => const Members()
   }));

@@ -3,14 +3,14 @@ import '/./utils/user_preferences.dart';
 import '/./widgets/appbar_widget.dart';
 import 'TapBar.dart';
 
-class PerPage extends StatefulWidget {
-  const PerPage({super.key});
+class Performance extends StatefulWidget {
+  const Performance({super.key});
 
   @override
   _PerPageState createState() => _PerPageState();
 }
 
-class _PerPageState extends State<PerPage> {
+class _PerPageState extends State<Performance> {
   @override
   Widget build(BuildContext context) {
     var user = UserPreferences.myUser;
