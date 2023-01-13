@@ -6,9 +6,11 @@ const String invalid_credentials_error = "Please verify your credentials !";
 const String invalid_format_error = "Invalid Email format !";
 const String valid_login = "Welcome Back !";
 
-String loginMessage = "login message";
+String loginMessage = "";
 var token = null;
 int firstId = 1;
+TextEditingController emailInput = TextEditingController();
+TextEditingController passwordInput = TextEditingController();
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -21,8 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-    TextEditingController emailInput = TextEditingController();
-    TextEditingController passwordInput = TextEditingController();
+
     return Material(
       child: Container(
         padding: const EdgeInsets.all(60),
@@ -145,17 +146,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                           return null;
                         },
-                        keyboardType: TextInputType.visiblePassword,
+                        // keyboardType: TextInputType.visiblePassword,
                         style: const TextStyle(color: Colors.white),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 44.0,
                     ),
                   ],
                 ),
               ),
             ),
+            // EMPTY SPACE
+            const SizedBox(height: 2),
+
+            // LOG in  MESSAGE
+            Text(
+              loginMessage,
+              style: TextStyle(color: Colors.pinkAccent),
+            ),
+            //EMPTY SPACE
+            const SizedBox(height: 10),
+
+            // SUBMIT BUTTON
             SizedBox(
               width: 180.0,
               height: 55,
@@ -185,39 +195,45 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-}
 
-void login(BuildContext context, String email, String password) async {
-  try {
-    var res = await ProfileApi.postLogin(email, password);
-    int statusCode = res.statusCode;
-    if (statusCode == 422) {
-      loginMessage = invalid_format_error;
-      // print("invalid email format");
-    } else if (statusCode == 404) {
-      loginMessage = invalid_credentials_error;
-    } else {
-      if (statusCode == 200) {
-        var decodedBody = json.decode(res.body);
-        token = decodedBody['token'];
-        if (token == null) {
-          loginMessage = invalid_credentials_error;
-        } else {
-          firstId = decodedBody["user"]['id'];
-          //print(decodedBody["user"]["image"]);
-          loginMessage = valid_login;
+  void login(BuildContext context, String email, String password) async {
+    try {
+      var res = await ProfileApi.postLogin(email, password);
+      int statusCode = res.statusCode;
+      if (statusCode == 422) {
+        loginMessage = invalid_format_error;
+        passwordInput.text = "";
+      } else if (statusCode == 404) {
+        loginMessage = invalid_credentials_error;
+        passwordInput.text = "";
+      } else {
+        if (statusCode == 200) {
+          var decodedBody = json.decode(res.body);
+          token = decodedBody['token'];
+          if (token == null) {
+            loginMessage = invalid_credentials_error;
+            passwordInput.text = "";
+          } else {
+            firstId = decodedBody["user"]['id'];
+            loginMessage = valid_login;
+          }
         }
       }
+      if (loginMessage == valid_login) {
+        loginMessage = "";
+        emailInput.text = "";
+        passwordInput.text = "";
+
+        Navigator.pushNamed(
+          context,
+          '/home_page',
+        );
+      } else {
+        print(loginMessage);
+        setState(() {});
+      }
+    } catch (exc) {
+      print(exc);
     }
-    if (loginMessage == valid_login) {
-      Navigator.pushNamed(
-        context,
-        '/home_page',
-      );
-    } else {
-      print(loginMessage);
-    }
-  } catch (exc) {
-    print(exc);
   }
 }

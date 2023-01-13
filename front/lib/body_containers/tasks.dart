@@ -29,6 +29,7 @@ class TasksState extends State<Tasks> {
   @override
   Widget build(BuildContext context) {
     setState(() {
+      print("gz");
       viewedMember = loggedProfile.isLeader ? selectedMember : loggedProfile;
       var x = viewedMember.tasksInfo;
       var taskList = x.map((model) => Task.fromJson(model)).toList();
