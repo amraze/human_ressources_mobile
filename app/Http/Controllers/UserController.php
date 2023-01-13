@@ -9,19 +9,19 @@ use Faker\Core\Number;
 
 class UserController extends Controller
 {
-    // Index
+    // View all users
     public function index()
     {
         $users = User::all();
         return response()->json($users);
     }
-    // View
+    // View one user
     public function view($id)
     {
         $user = User::find($id);
         return response()->json($user);
     }
-    // Store
+    // Create one user
     public function store(Request $request)
     {
         $request->validate([
@@ -49,11 +49,10 @@ class UserController extends Controller
             'email'              => $request->email,
             'password'  => bcrypt($request->password),
         ]);
-        $user->createToken('auth_token')->plainTextToken;
 
         return (response()->json($user));
     }
-    // Update
+    // Update one user
     public function update(Request $request, $id)
     {
         $user = User::find($id);
@@ -78,7 +77,7 @@ class UserController extends Controller
 
         return (response()->json($user));
     }
-    // Destroy
+    // Delete one user
     public function destroy($id)
     {
         $user = User::find($id);

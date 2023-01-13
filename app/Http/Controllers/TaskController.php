@@ -7,18 +7,19 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    // Index
+    // View all tasks
     public function index()
     {
         $tasks = Task::all();
         return response()->json($tasks);
     }
+    // View one task
     public function view($id)
     {
         $task = Task::find($id);
         return response()->json($task);
     }
-    // Add
+    // Add one task
     public function store(Request $request)
     {
         $request->validate([
@@ -35,10 +36,10 @@ class TaskController extends Controller
         $task = Task::create([
             'user_id'         => $request->user_id,
             'project_id'      => $request->project_id,
-            'name'            => $request->name ,
+            'name'            => $request->name,
             'description'     => $request->description,
             'leader_grade'    => $request->leader_grade,
-            'date_grade'      => $request->date_grade ,
+            'date_grade'      => $request->date_grade,
             'start_date'      => $request->start_date ?? Null,
             'end_date'        => $request->end_date ?? Null,
             'deadline'        => $request->deadline,
@@ -46,7 +47,7 @@ class TaskController extends Controller
 
         return (response()->json($task));
     }
-    // Edit
+    // Edit one task
     public function update(Request $request, $id)
     {
         $task = Task::find($id);
@@ -64,7 +65,7 @@ class TaskController extends Controller
 
         return (response()->json($task));
     }
-    // Destroy
+    // Delete one task
     public function destroy($id)
     {
         $task = task::find($id);

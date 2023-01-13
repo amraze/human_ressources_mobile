@@ -16,13 +16,11 @@ class AuthController extends Controller
             'password'  => 'required',
         ]);
         $user = User::where('email', $request['email'])->firstOrFail();
-        $user->poles;
         if (!$user || !Hash::check($request['password'], $user->password))
             return response()->json(['message' => 'Wrong Input']);
         else {
             $token = $user->createToken('auth_token')->plainTextToken;
             $message = "Welcome Back !";
-            $user->last_online_at = now();
             $user->save();
             return response()->json(compact('message', 'user', 'token'));
         }

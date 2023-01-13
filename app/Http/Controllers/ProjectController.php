@@ -8,19 +8,19 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    // Index
+    // View all tasks
     public function index()
     {
         $projects = Project::all();
         return response()->json($projects);
     }
-    // View
+    // See one task
     public function view($id)
     {
         $project = Project::find($id);
         return response()->json($project);
     }
-    // Store
+    // Create one task
     public function store(Request $request)
     {
         $request->validate([
@@ -48,7 +48,7 @@ class ProjectController extends Controller
 
         return (response()->json($project));
     }
-    // Update
+    // Edit one task
     public function update(Request $request, $id)
     {
         $project = Project::find($id);
@@ -75,7 +75,7 @@ class ProjectController extends Controller
 
         return (response()->json($project));
     }
-    // Destroy
+    // Delete one task
     public function destroy($id)
     {
         $project = Project::find($id);
