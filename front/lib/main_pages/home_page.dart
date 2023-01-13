@@ -69,6 +69,10 @@ class _HomePageState extends State<HomePage> {
           : setState(() {
               _selectedIndex = index;
               isOnCurrentPage = index == 1;
+              if (isOnCurrentPage && !loggedProfile.isLeader) {
+                TasksState.updateViewedMember();
+                Navigator.pushNamed(context, '/tasks');
+              }
             });
     }
 

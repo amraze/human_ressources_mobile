@@ -203,11 +203,11 @@ class TasksState extends State<Tasks> {
 
   Container _buildCardTask(int index, int innerIndex) {
     return Container(
-      width: 300.0,
+      width: 250.0,
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Draggable<Map<String, Object>>(
           feedback: Container(
-            width: 300,
+            width: 250,
             child: Card(
                 color: Color.fromARGB(255, 31, 31, 42),
                 clipBehavior: Clip.antiAlias,

@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             // SUBMIT BUTTON
             SizedBox(
-              width: 180.0,
+              width: 260.0,
               height: 55,
               child: RawMaterialButton(
                 fillColor: Colors.white,
@@ -183,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: const Text("SIGN IN",
                     style: TextStyle(
                       color: Color(0xff2496AC),
-                      fontSize: 22.0,
+                      fontSize: 20.0,
                     )),
               ),
             ),

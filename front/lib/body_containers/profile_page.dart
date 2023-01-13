@@ -14,7 +14,7 @@ Widget buildProfilePage(BuildContext context) {
     decoration: const BoxDecoration(
       gradient: LinearGradient(
           colors: [
-            Color(0xFF353445),
+            Color(0xFF53445),
             Color(0xFF1b1d2a),
           ],
           begin: Alignment.topCenter,
