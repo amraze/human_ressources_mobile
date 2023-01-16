@@ -6,18 +6,24 @@ import '../api_utils/project_api.dart';
 import '../model/profile.dart';
 import '../body_containers/tasks.dart';
 
+// Main Members class.
 class Members extends StatelessWidget {
   const Members({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(0),
       padding: const EdgeInsets.fromLTRB(40, 40, 35, 10),
+
+      // Gradient background.
       decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
+
+      // Building list of members using list view builder.
       child: ListView.builder(
         itemCount: viewedProject.members.length,
         itemBuilder: (context, index) {
@@ -31,6 +37,7 @@ class Members extends StatelessWidget {
     );
   }
 
+  // Return the widget of building member.
   Widget buildMemberCard(BuildContext context, String memberName,
           String imageURL, int cardIndex) =>
       Column(
@@ -42,8 +49,10 @@ class Members extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
               ),
               child: InkWell(
+                // Navigating to the member tasks page.
                 onTap: () async {
                   try {
+                    //Getting the id of the selected member and getting his profile.
                     var selectedMemberId = viewedProject.members[cardIndex].id;
                     var res = await ProfileApi.getProfileById(selectedMemberId);
                     var decodedBody = json.decode(res.body);
@@ -56,6 +65,7 @@ class Members extends StatelessWidget {
                 },
                 child: Column(
                   children: [
+                    // Image of the member.
                     Ink.image(
                       image: NetworkImage(
                         imageURL,

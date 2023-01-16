@@ -6,12 +6,9 @@ import '../preferences/project_preferences.dart';
 Project viewedProject = ProjectPreferences.myProject;
 
 class Projectapi {
-  static Future getProjects() async {
-    return await http.get(Uri.parse('https://supcomje.tn/mobile/api/projects'));
-  }
-
+  // Fetches project data by the leader id from the database using api url.
   static Future getProjectbyid(int id) async {
     return await http.get(Uri.parse('https://supcomje.tn/mobile/api/projects/' +
-        id.toString())); // project ID
+        id.toString())); // leader ID
   }
 }

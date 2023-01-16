@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../preferences/user_preferences.dart';
-import '/./performance_utils/PerCard.dart';
+import 'per_card.dart';
 
 var user = UserPreferences.myUser;
 

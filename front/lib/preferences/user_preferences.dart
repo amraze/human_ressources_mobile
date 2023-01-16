@@ -1,5 +1,6 @@
 import '../model/users.dart';
 
+//Initializing User class utility.
 class UserPreferences {
   static var myUser = User(
       age: 22,

@@ -1,5 +1,6 @@
 import '/./model/project.dart';
 
+//Initializing Project class utility.
 class ProjectPreferences {
   static var myProject = Project(
       leaderid: 1,

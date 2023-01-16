@@ -1,5 +1,6 @@
 import '/./model/task.dart';
 
+//Initializing Task class utility.
 class TaskPreferences {
   static var myTask = Task(
       id: 1,

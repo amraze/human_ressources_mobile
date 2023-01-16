@@ -4,13 +4,16 @@ import '/./widgets/button_widget.dart';
 import '/./widgets/numbers_widget.dart';
 // import '/./widgets/profile_widget.dart';
 
+// Constant profile image
 const circleAvatar = CircleAvatar(
   radius: 70,
   backgroundImage: AssetImage('assets/images/naski.png'),
 );
 
+// Returns the widget containing the profile page.
 Widget buildProfilePage(BuildContext context) {
   return Container(
+    // Gradient background.
     decoration: const BoxDecoration(
       gradient: LinearGradient(
           colors: [
@@ -22,6 +25,8 @@ Widget buildProfilePage(BuildContext context) {
           stops: [0.0, 1.0],
           tileMode: TileMode.clamp),
     ),
+
+    // Profile info list.
     child: ListView(
       physics: const BouncingScrollPhysics(),
       children: [
@@ -29,10 +34,6 @@ Widget buildProfilePage(BuildContext context) {
           height: 30,
         ),
         circleAvatar,
-        // ProfileWidget(
-        //   imagePath: loggedProfile.imagePath,
-        //   onClicked: () async {},
-        // ),
         const SizedBox(height: 24),
         buildName(),
         const SizedBox(height: 24),
@@ -46,6 +47,8 @@ Widget buildProfilePage(BuildContext context) {
   );
 }
 
+
+// //Building name widget.
 Widget buildName() => Column(
       children: [
         Text(
@@ -64,6 +67,7 @@ Widget buildName() => Column(
       ],
     );
 
+// Building upgrade button.
 Widget buildUpgradeButton(BuildContext context) => ButtonWidget(
       text: 'Check Performance',
       onClicked: () {
@@ -71,6 +75,7 @@ Widget buildUpgradeButton(BuildContext context) => ButtonWidget(
       },
     );
 
+// Building about button.
 Widget buildAbout() => Container(
       padding: const EdgeInsets.symmetric(horizontal: 48),
       child: Column(

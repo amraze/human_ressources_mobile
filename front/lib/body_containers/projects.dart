@@ -8,10 +8,14 @@ import '../body_containers/tasks.dart';
 import '../api_utils/profile_api.dart';
 import '../api_utils/project_api.dart';
 
+// leader Project list viewed in the main projects page.
 var projectList =
     loggedProfile.projects.map((model) => Project.fromJson(model)).toList();
+
+// Current Project.
 var firstProjectList = [projectList[0]];
 
+// Projects main Class.
 class Projects extends StatelessWidget {
   const Projects({Key? key}) : super(key: key);
   @override
@@ -19,11 +23,15 @@ class Projects extends StatelessWidget {
     return Container(
         margin: const EdgeInsets.all(0),
         padding: const EdgeInsets.fromLTRB(40, 40, 35, 10),
+
+        // Gradient background decoration.
         decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: <Color>[Color(0xff353445), Color(0xff1b1d2a)])),
+
+        // Building project list cards uisng a list view builder.
         child: ListView.builder(
           itemCount: isOnCurrentPage ? 1 : projectList.length,
           itemBuilder: (context, index) {
@@ -35,6 +43,7 @@ class Projects extends StatelessWidget {
         ));
   }
 
+  // // Return a project card, taking the name and image in parameters.
   Widget buildProjectCard(BuildContext context, String projectName,
           String imageURL, cardIndex) =>
       Column(
@@ -46,8 +55,10 @@ class Projects extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
               ),
               child: InkWell(
+                // Navigate to members page or tasks page based on the role of the user.
                 onTap: () async {
                   try {
+                    // Fetching members list if user isLeader.
                     if (loggedProfile.isLeader) {
                       var selectedProjectLeaderId = projectList[cardIndex].id;
                       var res = await Projectapi.getProjectbyid(
@@ -59,7 +70,9 @@ class Projects extends StatelessWidget {
                           .toList();
                       viewedProject.members = memberList;
                       Navigator.pushNamed(context, '/members');
-                    } else {
+                    }
+                    // Fetching tasks list if user is member.
+                    else {
                       TasksState.updateViewedMember();
                       Navigator.pushNamed(context, '/tasks');
                     }
@@ -69,6 +82,7 @@ class Projects extends StatelessWidget {
                 },
                 child: Column(
                   children: [
+                    // Project image.
                     Ink.image(
                       image: NetworkImage(
                         imageURL,

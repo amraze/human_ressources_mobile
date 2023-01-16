@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
-import 'package:mobile_project/model/profile.dart';
 import '../api_utils/profile_api.dart';
 import '../api_utils/project_api.dart';
 import '../api_utils/task_api.dart';
 import '../model/task.dart';
 import 'task_form.dart';
 
+// Tasks list of each member.
 var _tasksInfo;
+
+// Current viewed member.
 var viewedMember;
 
 class Tasks extends StatefulWidget {
@@ -18,6 +20,7 @@ class Tasks extends StatefulWidget {
 }
 
 class TasksState extends State<Tasks> {
+  // Initialises task info list according to the viewed member.
   static void updateViewedMember() {
     viewedMember = loggedProfile.isLeader ? selectedMember : loggedProfile;
     var x = viewedMember.tasksInfo;
@@ -43,11 +46,15 @@ class TasksState extends State<Tasks> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+
+          // Gradient background.
           decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: <Color>[Color(0xff373447), Color(0xff1F1E2B)])),
+
+          // List view builder of tasks list.
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: cards.length,
@@ -62,6 +69,7 @@ class TasksState extends State<Tasks> {
     );
   }
 
+// Building task card using task name and image.
   Widget buildTaskCard(String taskName, String imageURL) => Card(
       color: const Color.fromARGB(255, 31, 31, 42),
       clipBehavior: Clip.antiAlias,
@@ -85,6 +93,8 @@ class TasksState extends State<Tasks> {
           ],
         ),
       ));
+
+  // Building add  task button.
   Widget _buildAddCardTaskWidget(context, index) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 50.0),
@@ -113,6 +123,7 @@ class TasksState extends State<Tasks> {
     );
   }
 
+// Building cards like todo...
   Widget _buildCard(BuildContext context, int index, List<int> color) {
     return Container(
       child: Stack(
@@ -147,18 +158,21 @@ class TasksState extends State<Tasks> {
                     height: MediaQuery.of(context).size.height * 0.6,
                     child: DragAndDropList<dynamic>(
                       _tasksInfo[index],
+
+                      // Building all tasks of a card using itembuilder.
                       itemBuilder: (BuildContext context, item) {
                         return _buildCardTask(
                             index, _tasksInfo[index].indexOf(item));
                       },
                       onDragFinish: (oldIndex, newIndex) {
+                        // reorder in one column.
                         _handleReOrder(oldIndex, newIndex, index);
                       },
-                      // canBeDraggedTo: (one, two) => true,
                       dragElevation: 8.0,
                     ),
                   ),
                 ),
+                // Adding add task button only if the user is a leader.
                 loggedProfile.isLeader
                     ? _buildAddCardTaskWidget(context, index)
                     : SizedBox(height: 1),
@@ -171,31 +185,20 @@ class TasksState extends State<Tasks> {
                 return true;
               },
               onLeave: (data) {},
-              onAccept: (data) async {
+              onAccept: (data) {
                 if (data['from'] == index) {
                   return;
                 }
+
+                // Handling task drag from a satatus to another
+                // and calling patch in taskapi to update it in the data base.
                 _tasksInfo[data['from']].remove(data['cardInfoList']);
                 _tasksInfo[index].add(data['cardInfoList']);
                 var taskID = data['cardInfoList'].id;
-                var res = await Taskapi.updateTaskStatus(taskID, index);
-
-                // viewedMember.tasksInfo.add(data['cardInfoList'].toJson());
-                // viewedMember.tasksInfo.remove(data['cardInfoList'].toJson());
-
-                // print(viewedMember.tasksInfo.length);
+                var res = Taskapi.updateTaskStatus(taskID, index);
                 setState(() {});
-                ////patch///////
-                /////////
-                ///
-                ///
-                ///
-                ///
-                ///
               },
               builder: (context, accept, reject) {
-                //print("--- > $accept");
-                //print(reject);
                 return Container();
               },
             ),
@@ -205,6 +208,7 @@ class TasksState extends State<Tasks> {
     );
   }
 
+// Builds the task card.
   Container _buildCardTask(int index, int innerIndex) {
     return Container(
       width: 250.0,
@@ -294,6 +298,7 @@ class TasksState extends State<Tasks> {
     );
   }
 
+// Add task dialog or pop up
   _showAddCardTask(BuildContext context, int index) {
     showDialog(
         context: context,
@@ -305,12 +310,14 @@ class TasksState extends State<Tasks> {
         });
   }
 
+// Add card dialog or pop up
   void addCard(int index, BuildContext context) {
     Navigator.of(context).pop();
     _addCardTask(index);
     setState(() {});
   }
 
+// Creates a new task and adds it to task info and also calls post method.
   _addCardTask(int index) async {
     String taskName = taskNameInput.text;
     String taskBeginDate = beginDateInput.text;
@@ -327,14 +334,15 @@ class TasksState extends State<Tasks> {
     print(cardInfoList.name);
 
     _tasksInfo[index].add(cardInfoList);
-    //var res = await Taskapi.postTask(cardInfoList);
-    //print(res.statusCode);
+    var res = await Taskapi.postTask(cardInfoList);
+    print(res.statusCode);
     taskNameInput.text = "";
     beginDateInput.text = "";
     deadlineInput.text = "";
     descriptionInput.text = "";
   }
 
+// Handles reorder in the same column.
   _handleReOrder(int oldIndex, int newIndex, int index) {
     var oldValue = _tasksInfo[index][oldIndex];
     _tasksInfo[index][oldIndex] = _tasksInfo[index][newIndex];

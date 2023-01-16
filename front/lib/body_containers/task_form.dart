@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'tasks.dart';
 
+// Form controllers.
 TextEditingController taskNameInput = TextEditingController();
 TextEditingController beginDateInput = TextEditingController();
 TextEditingController deadlineInput = TextEditingController();
@@ -13,6 +14,8 @@ Widget buildTaskForm(BuildContext context, int index, TasksState TaskInstance) {
     child: Container(
       margin: const EdgeInsets.all(0),
       padding: const EdgeInsets.fromLTRB(40, 10, 35, 35),
+
+      // Gradient background.
       decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -29,7 +32,7 @@ Widget buildTaskForm(BuildContext context, int index, TasksState TaskInstance) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //TASK NAME
+                  //TASK NAME input
                   TextFormField(
                     controller: taskNameInput,
                     style: TextStyle(color: Colors.white),
@@ -49,7 +52,8 @@ Widget buildTaskForm(BuildContext context, int index, TasksState TaskInstance) {
                       return null;
                     },
                   ),
-                  //BEGIN DATE
+
+                  //BEGIN DATE input.
                   TextFormField(
                     controller: beginDateInput,
                     style: TextStyle(color: Colors.white),
@@ -86,7 +90,8 @@ Widget buildTaskForm(BuildContext context, int index, TasksState TaskInstance) {
                       }
                     },
                   ),
-                  // DEADLINE
+
+                  // DEADLINE input.
                   TextFormField(
                     controller: deadlineInput,
                     style: TextStyle(color: Colors.white),
@@ -123,7 +128,8 @@ Widget buildTaskForm(BuildContext context, int index, TasksState TaskInstance) {
                       }
                     },
                   ),
-                  //DESCRIPTION
+
+                  //DESCRIPTION input.
                   TextFormField(
                     controller: descriptionInput,
                     maxLines: 3,
@@ -143,7 +149,11 @@ Widget buildTaskForm(BuildContext context, int index, TasksState TaskInstance) {
                       return null;
                     },
                   ),
+
+                  // Empty box.
                   SizedBox(height: 16.0),
+
+                  // Elevated Button.
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(
