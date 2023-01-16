@@ -1,8 +1,5 @@
 # RH_Mobile
-Colors :
-grey for background 1 : 0xff373447
-grey for background 2 : 0xff1F1E2B
-Blue for Buttons : xff2496AC
-Grey for Texts : 0xffD3D3D3
-
-
+To install the project open it up vs-code or android studio,
+you may need to go to vscode settings -> Flutter Run Additional Args and add this line: --no-souns-null-safety
+next, choose the device you want to install the app in and run main file contained in front/lib/main_pages/main.dart
+that's it you have your app installed now.
