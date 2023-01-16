@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import '../api_utils/profile_api.dart';
 import 'dart:convert';
 
+// Variables
+
+// Login messages
 const String invalid_credentials_error = "Please verify your credentials !";
 const String invalid_format_error = "Invalid Email format !";
 const String valid_login = "Welcome Back !";
-
 String loginMessage = "";
+
 var token = null;
-int firstId = 1;
+int loggedId = 1;
+
+// Form controllers.
 TextEditingController emailInput = TextEditingController();
 TextEditingController passwordInput = TextEditingController();
 
+// Login Screen main class.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -27,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return Material(
       child: Container(
         padding: const EdgeInsets.all(60),
+
+        // Gradient Background
         decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -36,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            // Logo of the login screen
             Image.asset(
               'assets/images/logo.png',
               height: 120,
@@ -44,6 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 30.0,
             ),
+
+            // Welcoming text
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const <Widget>[
@@ -67,6 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 44.0,
             ),
+
+            // Form fields.
             Form(
               key: _formKey,
               child: Padding(
@@ -74,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //EMAIL BOX INPUT
+                    // Email input field.
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -113,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 20,
                     ),
 
-                    //PASSWORD BOX INPUT
+                    // Password input field.
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -146,7 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                           return null;
                         },
-                        // keyboardType: TextInputType.visiblePassword,
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
@@ -154,18 +166,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            // EMPTY SPACE
+            // EMPTY BOX.
             const SizedBox(height: 2),
 
-            // LOG in  MESSAGE
+            // Login message.
             Text(
               loginMessage,
               style: TextStyle(color: Colors.pinkAccent),
             ),
-            //EMPTY SPACE
+            // EMPTY BOX.
             const SizedBox(height: 10),
 
-            // SUBMIT BUTTON
+            // Submit button.
             SizedBox(
               width: 260.0,
               height: 55,
@@ -176,6 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0)),
                 onPressed: () {
+                  // Call of login function to verify credentials when pressing the submit button.
                   if (_formKey.currentState!.validate()) {
                     login(context, emailInput.text, passwordInput.text);
                   }
@@ -196,13 +209,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  // Login function.
   void login(BuildContext context, String email, String password) async {
     try {
+      // Calling the postLogin function returning the response from the API.
       var res = await ProfileApi.postLogin(email, password);
       int statusCode = res.statusCode;
+
+      // Invalid format error.
       if (statusCode == 422) {
         loginMessage = invalid_format_error;
         passwordInput.text = "";
+        // Invalid Email => Invalid credentials error.
       } else if (statusCode == 404) {
         loginMessage = invalid_credentials_error;
         passwordInput.text = "";
@@ -210,20 +228,26 @@ class _LoginScreenState extends State<LoginScreen> {
         if (statusCode == 200) {
           var decodedBody = json.decode(res.body);
           token = decodedBody['token'];
+
+          // Invalid Password => Invalid credentials error.
           if (token == null) {
             loginMessage = invalid_credentials_error;
             passwordInput.text = "";
+
+            // Valid Login.
           } else {
-            firstId = decodedBody["user"]['id'];
+            loggedId = decodedBody["user"]['id'];
             loginMessage = valid_login;
           }
         }
       }
+
       if (loginMessage == valid_login) {
         loginMessage = "";
         emailInput.text = "";
         passwordInput.text = "";
 
+        // If the login is successful, we navigate to the home page.
         Navigator.pushNamed(
           context,
           '/home_page',

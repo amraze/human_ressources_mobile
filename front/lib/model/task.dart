@@ -4,11 +4,10 @@ class Task {
   final project_id;
   final name;
   final description;
-  final grade;
+  final status;
   final start_date;
   final end_date;
   final deadline;
-  final status;
 
   Task({
     this.id,
@@ -16,11 +15,10 @@ class Task {
     this.project_id,
     this.name,
     this.description,
-    this.grade,
+    this.status,
     this.start_date,
     this.end_date,
     this.deadline,
-    this.status,
   });
   Task.fromJson(Map json)
       : id = json['id'],
@@ -28,11 +26,10 @@ class Task {
         project_id = json['project_id'],
         name = json['name'],
         description = json['description'],
-        grade = json['grade'],
+        status = json['status'],
         start_date = json['start_date'],
         end_date = json['end_date'] == 1,
-        deadline = json['deadline'],
-        status = json['status'];
+        deadline = json['deadline'];
 
   Map toJson() {
     return {
@@ -40,11 +37,10 @@ class Task {
       'project_id': project_id,
       'name': name,
       'description': description,
-      'grade': grade,
+      'status': status,
       'start_date': start_date,
       'end_date': end_date,
       'deadline': deadline,
-      'status': status,
     };
   }
 }

@@ -10,6 +10,7 @@ import '../main_pages/login_screen.dart';
 
 var isOnCurrentPage = false;
 
+// Home Page main class
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -18,13 +19,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Getting profiles from api method
+  // Call of  get profile by id from api method.
   void getProfilefromApi(int id) async {
     try {
       var res = await ProfileApi.getProfileById(id);
       setState(() {
         var x = json.decode(res.body);
-
         loggedProfile = Profile.fromJson(x);
       });
     } catch (exc) {
@@ -35,34 +35,44 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getProfilefromApi(firstId);
+    // Get the logged in profile first time loading the home page.
+    // We use logged id from the login screen class.
+    getProfilefromApi(loggedId);
   }
 
+  // The index of the navigation bar it takes values from 0 to 3.
   int _selectedIndex = 0;
+
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
+  // Constant text style for the options of the drawer.
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
+
+  // Constant avatar image.
   static const circleAvatar = CircleAvatar(
     radius: 80,
     backgroundImage: AssetImage('assets/images/naski.png'),
   );
 
-  // User name
-  String username = "";
-  bool roleIsLeader = true;
-
   @override
   Widget build(BuildContext context) {
+
+    // The body list of the class home page.
+    // According to the navigation bar index (selected_index) the body takes one widget from this list.
     final List<Widget> _widgetOptions = <Widget>[
-      // Profile
+      
+      // Profile widget
       buildProfilePage(context),
-      // Current Project
-      //************************************************************ */
+      
+      // Current Project widget
       loggedProfile.isLeader ? Projects() : const Tasks(),
-      // Projects
+      
+      // Projects widget
       const Projects(),
     ];
 
+    // Change the index according to the tap on the navigation bar
     void _onItemTapped(int index) {
       index == 3
           ? _drawerKey.currentState?.openDrawer()
@@ -86,6 +96,8 @@ class _HomePageState extends State<HomePage> {
                 .textTheme
                 .copyWith(caption: const TextStyle(color: Colors.yellow)),
           ),
+
+          // NAVIGATION BAR
           child: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -111,6 +123,8 @@ class _HomePageState extends State<HomePage> {
             unselectedItemColor: Colors.white,
             onTap: _onItemTapped,
           )),
+
+      // SIDE DRAWER.
       drawer: Drawer(
         backgroundColor: const Color.fromRGBO(34, 36, 49, 1),
         shape: const RoundedRectangleBorder(
@@ -118,7 +132,6 @@ class _HomePageState extends State<HomePage> {
                 topRight: Radius.circular(30),
                 bottomRight: Radius.circular(30))),
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
             Container(
@@ -175,6 +188,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+
+      // BODY.
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

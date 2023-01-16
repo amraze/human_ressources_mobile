@@ -4,7 +4,8 @@ import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
 import 'package:mobile_project/model/profile.dart';
 import '../api_utils/profile_api.dart';
 import '../api_utils/project_api.dart';
-import '../model/Task.dart';
+import '../api_utils/task_api.dart';
+import '../model/task.dart';
 import 'task_form.dart';
 
 var _tasksInfo;
@@ -170,12 +171,15 @@ class TasksState extends State<Tasks> {
                 return true;
               },
               onLeave: (data) {},
-              onAccept: (data) {
+              onAccept: (data) async {
                 if (data['from'] == index) {
                   return;
                 }
                 _tasksInfo[data['from']].remove(data['cardInfoList']);
                 _tasksInfo[index].add(data['cardInfoList']);
+                var taskID = data['cardInfoList'].id;
+                var res = await Taskapi.updateTaskStatus(taskID, index);
+
                 // viewedMember.tasksInfo.add(data['cardInfoList'].toJson());
                 // viewedMember.tasksInfo.remove(data['cardInfoList'].toJson());
 
@@ -307,7 +311,7 @@ class TasksState extends State<Tasks> {
     setState(() {});
   }
 
-  _addCardTask(int index) {
+  _addCardTask(int index) async {
     String taskName = taskNameInput.text;
     String taskBeginDate = beginDateInput.text;
     String taskDeadline = deadlineInput.text;
@@ -317,11 +321,14 @@ class TasksState extends State<Tasks> {
         project_id: viewedProject.leaderid,
         name: taskName,
         description: taskDescription,
-        grade: 50,
         start_date: taskBeginDate,
-        deadline: taskDeadline);
+        deadline: taskDeadline,
+        status: index);
+    print(cardInfoList.name);
 
     _tasksInfo[index].add(cardInfoList);
+    //var res = await Taskapi.postTask(cardInfoList);
+    //print(res.statusCode);
     taskNameInput.text = "";
     beginDateInput.text = "";
     deadlineInput.text = "";

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../api_utils/profile_api.dart';
 import '/./widgets/button_widget.dart';
 import '/./widgets/numbers_widget.dart';
-import '/./widgets/profile_widget.dart';
+// import '/./widgets/profile_widget.dart';
 
 const circleAvatar = CircleAvatar(
   radius: 70,
