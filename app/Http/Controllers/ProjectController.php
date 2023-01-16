@@ -82,3 +82,6 @@ class ProjectController extends Controller
         $project->delete();
     }
 }
+
+
+//voir les commentaires dans TaskController pour mieux comprendre .

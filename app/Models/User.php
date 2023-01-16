@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+//ces informations ne doivent pas figurer dans notre reponse Json en raison dde sécurité.
     protected $hidden = [
         'password',
         'remember_token',
@@ -31,6 +31,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+//la relation many to many entre la table users et la table project sera definie comme suit  
 
     public function projects()
     {

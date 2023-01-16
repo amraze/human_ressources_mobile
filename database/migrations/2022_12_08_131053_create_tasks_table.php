@@ -11,6 +11,9 @@ return new class extends Migration
      *
      * @return void
      */
+    //Ici on fait migrer nos attributs vers la base de donnees , c'est la premiere etape a faire apres le remplissage du fichier .env qui contient le nom de notre base de donnees .
+    //on definit tous les attributs puis on execute dans le terminal :"php artisan make:migration nom_de_la_table" et apres la table tasks sera ajoutée dans notre base de données .
+    //ceci s'appelle ORM : object-relational mapping 
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
@@ -25,7 +28,7 @@ return new class extends Migration
             $table->date('deadline')->nullable();
             $table->timestamps();
         });
-
+//on definit les relations entre les tables tout en indiquant les cles etrangères .
         Schema::table('tasks', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');

@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Performance;
 use Illuminate\Http\Request;
-
 class PerformanceController extends Controller
 {
     // Index
@@ -54,3 +52,5 @@ class PerformanceController extends Controller
         $performance->delete();
     }
 }
+
+//voir les commentaires dans TaskController 

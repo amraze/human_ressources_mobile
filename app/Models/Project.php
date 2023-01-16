@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    use HasFactory;
+    use HasFactory;//HasFactory permet le remplissage par des donnees aléatoires .
 
     protected $fillable = [
         'leader_id',
@@ -18,7 +18,7 @@ class Project extends Model
         'deadline',
         'category',
     ];
-
+//la relation many to many entre la table users et la table project sera definie comme suit  
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_project');
