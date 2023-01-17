@@ -13,12 +13,15 @@ class Taskapi {
   }
 
   static Future updateTaskStatus(taskId, status) async {
+    print(taskId);
     return await http.patch(
       Uri.parse('https://supcomje.tn/mobile/api/tasks/${taskId}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: json.encode({'status': status}),
+      body: json.encode({
+        'status': status,
+      }),
     );
   }
 

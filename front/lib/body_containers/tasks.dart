@@ -190,7 +190,7 @@ class TasksState extends State<Tasks> {
                   return;
                 }
 
-                // Handling task drag from a satatus to another
+                // Handling task drag from a status to another
                 // and calling patch in taskapi to update it in the data base.
                 _tasksInfo[data['from']].remove(data['cardInfoList']);
                 _tasksInfo[index].add(data['cardInfoList']);
@@ -331,7 +331,8 @@ class TasksState extends State<Tasks> {
         start_date: taskBeginDate,
         deadline: taskDeadline,
         status: index);
-    print(cardInfoList.name);
+    // print("add card task status :  ");
+    // print(index);
 
     _tasksInfo[index].add(cardInfoList);
     var res = await Taskapi.postTask(cardInfoList);
