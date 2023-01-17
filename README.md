@@ -3,7 +3,7 @@ To install the project open it up vs-code or android studio,
 you may need to go to vscode settings -> Flutter Run Additional Args and add this line: --no-souns-null-safety
 next, choose the device you want to install the app in and run main file contained in front/lib/main_pages/main.dart
 that's it you have your app installed now.
-Never forget to run : " flutter pub get " to install necessary packages .
+Never forget to run : ` flutter pub get ` to install necessary packages .
 
 # Overview
 The Management Task App is a simple and user-friendly tool for creating and tracking tasks within a team or organization. This app allows users to create and assign tasks, set deadlines, and track progress. It also includes features such as progress and performance tracking.
